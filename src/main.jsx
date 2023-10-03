@@ -8,7 +8,7 @@ import Home from './Home.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/site-card-vite/",
     element: <Home />
   }
 ])
