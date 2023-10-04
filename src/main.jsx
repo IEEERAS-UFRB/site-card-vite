@@ -4,7 +4,7 @@ import './index.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-
+import App from "./App"
 import Home from './routes/Home/Home.jsx'
 import Competidor from './routes/Competidor/Competidor.jsx'
 import Cadastrar from './routes/Cadastrar/index.jsx'
@@ -12,15 +12,21 @@ import Cadastrar from './routes/Cadastrar/index.jsx'
 const router = createBrowserRouter([
   {
     path: "/site-card-vite/",
-    element: <Home/>
-  },
-  {
-    path: "/site-card-vite/:id",
-    element: <Competidor/>
-  },
-  {
-    path: "/site-card-vite/cadastrar",
-    element: <Cadastrar/>
+    element: <App />,
+    children:[
+      {
+        path: "/site-card-vite/",
+        element: <Home/>
+      },
+      {
+        path: "/site-card-vite/:id",
+        element: <Competidor/>
+      },
+      {
+        path: "/site-card-vite/cadastrar",
+        element: <Cadastrar/>
+      }
+    ]
   }
 ])
 
