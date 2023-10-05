@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     width: 100vw;
     height: 100vh;
+    justify-content: space-evenly;
 }
 
 #card{
@@ -16,9 +17,14 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     background-color: #fff;
     color: #000;
+    cursor: pointer;
     font-family: sans-serif;
     border: 2px solid #63b4ff;
     box-shadow: 0 0 15px #63b4ff, inset 0 0 15px #63b4ff;
+}
+
+#card:hover{
+    box-shadow: 0 0 25px #63b4ff, inset 0 0 15px #63b4ff;
 }
 
 .header{
@@ -41,7 +47,7 @@
 .competidor{
     height: 300px;
     margin-top: 25px;
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import QrCode from '../../components/QrCode/QrCode'
 
 import blogFetch from "../../assets/axios/config"
-import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
+
+import "./style.css"
 
 const Cadastrar = () => {
 
     const { register, handleSubmit } = useForm()
 
-    const navigate = useNavigate()
 
     const [id, setId] = useState("")
-    
+
     const onSubmit = async (values) => {
         values.ranking = 0
         await blogFetch.post("/cad-competidor", values).then((res) => setId(res.data._id))
     }
-    
+
     return (
-        <div>
-
-            <button onClick={() => navigate(`/site-card-vite`)}>Voltar</button>
-
+        <div id="container-form">
             <form onSubmit={handleSubmit(async (data) => await onSubmit(data))}>
 
                 <section className="item-form">
@@ -74,11 +71,13 @@ const Cadastrar = () => {
                     <input required type="text" name="linkRobo" placeholder="link robô" {...register("linkRobo")} />
                 </section>
 
-                <button>Enviar</button>
+                <section className="containe-button">
+                    <button className="button">Enviar</button>
+                </section>
             </form>
 
             {
-                id !== "" ? <QrCode id = {id}/> : ""
+                id !== "" ? <QrCode id={id} /> : ""
             }
 
         </div>

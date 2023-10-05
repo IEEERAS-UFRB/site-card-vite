@@ -2,10 +2,13 @@
 import axios from "axios"
 import "./style.css"
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
     const [posts, setPosts] = useState([])
+
+    const navigate = useNavigate()
 
     const getPosts = async () => {
         try {
@@ -36,7 +39,7 @@ const Home = () => {
                     posts.map((item) => {
                         //colocar um navigate pra ir pra outra pagina quando clicar cno card
                         return (
-                            <section key={item._id} id="card" onClick={() => getDelet(item._id)}>
+                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`) }>
                                 <section className="header">
                                     <p>{item.ranking}</p>
                                     <h5>{item.nomeCompetidor}</h5>
@@ -47,7 +50,6 @@ const Home = () => {
                                 </section>
                                 <section className="robo">
                                     <img src={item.linkRobo} />
-                                    {/* <div style={{ backgroundImage: `url(${item.linkRobo})`, backgroundSize: "cover", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div> */}
                                 </section>
                                 <section className="body">
                                     <section className="content">

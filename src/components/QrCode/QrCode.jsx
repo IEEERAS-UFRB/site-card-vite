@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import QRCode from "react-qr-code"
 import QRCodeLink from "qrcode"
 
+import "./style.css"
+
 const QrCode = ({id}) => {
 
     console.log(id)
@@ -27,7 +29,7 @@ const QrCode = ({id}) => {
 
     return (
         <>
-            <div>
+            <div id="QR">
                 <QRCode value={newLink} id="qr-code" />
                 <a href={qrCodeLink} download={`qrcode.png`} >baixar qr</a>
             </div>
