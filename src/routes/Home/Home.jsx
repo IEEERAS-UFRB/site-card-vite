@@ -10,7 +10,7 @@ const Home = () => {
 
     const getPosts = async () => {
         try {
-            const res = await axios.get(`https://289b-200-128-102-253.ngrok.io/glossario`)
+            const res = await axios.get(`http://localhost:4000/competidor`)
             const data = res.data
 
             setPosts(data)

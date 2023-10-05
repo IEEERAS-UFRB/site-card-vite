@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 import QrCode from '../../components/QrCode/QrCode'
 
 import blogFetch from "../../assets/axios/config"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "react-hook-form"
 
 const Cadastrar = () => {
+
+    const { register, handleSubmit } = useForm()
 
     const navigate = useNavigate()
 
@@ -15,70 +17,71 @@ const Cadastrar = () => {
         //getPosts()
     }, [])
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        console.log(posts)
+    const onSubmit = async (data) => {
+        //await e.preventDefault()
+        console.log(data)
+
 
         //await blogFetch.post("/cad-glossario", { body: posts})
-        navigate("/site-card-vite")
+        //navigate("/site-card-vite")
     }
 
 
     return (
         <div>
 
-            <form onSubmit={(e) => onSubmit(e)} action="">
+            <form onSubmit={() => handleSubmit(onSubmit)()}>
                 
                 <section className="item-form">
                     <label htmlFor="">
                         Nome Competidor
                     </label>
-                    <input type="text" name="nomeCompetidor" placeholder="Nome do competidor" onChange={(e) => setPosts(e.target.value)} />
+                    <input type="text" name="nomeCompetidor" placeholder="Nome do competidor" {...register("nomeCompetidor")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Equipe
                     </label>
-                    <input type="text" name="equipe" placeholder="Equipe"/>
+                    <input type="text" name="equipe" placeholder="Equipe" {...register("equipe")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Modalidade
                     </label>
-                    <input type="text" name="modalidade" placeholder="Modalidade"/>
+                    <input type="text" name="modalidade" placeholder="Modalidade" {...register("modalidade")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Instituição
                     </label>
-                    <input type="text" name="instituição" placeholder="Instituição"/>
+                    <input type="text" name="instituicao" placeholder="Instituição" {...register("instituicao")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Nome do Robô
                     </label>
-                    <input type="text" name="nomeRobo" placeholder="Nome do Robô"/>
+                    <input type="text" name="nomeRobo" placeholder="Nome do Robô" {...register("nomeRobo")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Link Gif
                     </label>
-                    <input type="text" name="linkGif" placeholder="link gif"/>
+                    <input type="text" name="linkGif" placeholder="link gif" {...register("linkGif")}/>
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Link foto robô
                     </label>
-                    <input type="text" name="fotoRobo" placeholder="link robô"/>
+                    <input type="text" name="fotoRobo" placeholder="link robô" {...register("fotoRobo")}/>
                 </section>
 
-                <button>Enviar</button>
+                <button type="submit">Enviar</button>
             </form>
 
             <QrCode />
