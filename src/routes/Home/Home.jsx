@@ -1,5 +1,4 @@
 
-import Nav from "../../components/nav";
 import axios from "axios"
 import "./style.css"
 import { useEffect, useState } from "react";
@@ -25,15 +24,14 @@ const Home = () => {
 
     return (
         <>
-            <Nav />
             <div id="continer-cards">
 
                 {posts.length === 0 ? <p> carreagando... </p> : (
                     posts.map((item) => {
                         //colocar um navigate pra ir pra outra pagina quando clicar cno card
                         return (
-                            <section key={item.id} id="card"> 
-                                {item.id}
+                            <section key={item._id} id="card"> 
+                                {item._id}
                             </section>
                         )
                     })

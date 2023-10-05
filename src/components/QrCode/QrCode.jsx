@@ -3,7 +3,11 @@ import React, { useState } from "react"
 import QRCode from "react-qr-code"
 import QRCodeLink from "qrcode"
 
-const QrCode = () => {
+const QrCode = ({id}) => {
+
+    console.log(id)
+
+    let newLink = `http://127.0.0.1:5173/site-card-vite/${id}`
 
     const [link, setLink] = useState("")
     const [qrCodeLink, setQrCodeLink] = useState("")
@@ -25,8 +29,8 @@ const QrCode = () => {
     return (
         <>
             <div>
-                <QRCode value={link} id="qr-code" />
-                <input type="text" placeholder="link" onChange={(e) => handleQrCode(e)} value={link} />
+                <QRCode value={newLink} id="qr-code" />
+                <input type="text" placeholder="link" onChange={(e) => handleQrCode(e)} value={newLink} />
                 <a href={qrCodeLink} download={`qrcode.png`} >baixar qr</a>
             </div>
         </>

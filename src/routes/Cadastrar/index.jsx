@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import QrCode from '../../components/QrCode/QrCode'
 
 import blogFetch from "../../assets/axios/config"
@@ -10,82 +10,83 @@ const Cadastrar = () => {
     const { register, handleSubmit } = useForm()
 
     const navigate = useNavigate()
+    
+    let id = "katon"
 
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        //getPosts()
-    }, [])
-
-    const onSubmit = async (data) => {
-        //await e.preventDefault()
-        console.log(data)
-
-
-        //await blogFetch.post("/cad-glossario", { body: posts})
-        //navigate("/site-card-vite")
+    
+    const onSubmit = async (values) => {
+        //console.log(values)
+        
+        values.ranking = 0
+        
+        await blogFetch.post("/cad-competidor", values).then((res) => id = res.data._id)
+        return id
+        //navigate(`/site-card-vite/${id}`)
     }
-
+    
+    useEffect(() =>{
+        console.log("Iuiu")
+    },[id])
 
     return (
         <div>
 
-            <form onSubmit={() => handleSubmit(onSubmit)()}>
-                
+            <form onSubmit={handleSubmit(async (data) => await onSubmit(data))}>
+
                 <section className="item-form">
                     <label htmlFor="">
                         Nome Competidor
                     </label>
-                    <input type="text" name="nomeCompetidor" placeholder="Nome do competidor" {...register("nomeCompetidor")}/>
+                    <input required type="text" name="nomeCompetidor" placeholder="Nome do competidor" {...register("nomeCompetidor")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Equipe
                     </label>
-                    <input type="text" name="equipe" placeholder="Equipe" {...register("equipe")}/>
+                    <input required type="text" name="equipe" placeholder="Equipe" {...register("equipe")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Modalidade
                     </label>
-                    <input type="text" name="modalidade" placeholder="Modalidade" {...register("modalidade")}/>
+                    <input required type="text" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Instituição
                     </label>
-                    <input type="text" name="instituicao" placeholder="Instituição" {...register("instituicao")}/>
+                    <input required type="text" name="instituicao" placeholder="Instituição" {...register("instituicao")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Nome do Robô
                     </label>
-                    <input type="text" name="nomeRobo" placeholder="Nome do Robô" {...register("nomeRobo")}/>
+                    <input required type="text" name="nomeRobo" placeholder="Nome do Robô" {...register("nomeRobo")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Link Gif
                     </label>
-                    <input type="text" name="linkGif" placeholder="link gif" {...register("linkGif")}/>
+                    <input required type="text" name="linkGif" placeholder="link gif" {...register("linkGif")} />
                 </section>
 
                 <section className="item-form">
                     <label htmlFor="">
                         Link foto robô
                     </label>
-                    <input type="text" name="fotoRobo" placeholder="link robô" {...register("fotoRobo")}/>
+                    <input required type="text" name="linkRobo" placeholder="link robô" {...register("linkRobo")} />
                 </section>
 
-                <button type="submit">Enviar</button>
+                <button>Enviar</button>
             </form>
 
-            <QrCode />
-            
+            <QrCode id = {id}/>
+
         </div>
     )
 }
