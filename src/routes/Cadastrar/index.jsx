@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import QrCode from '../../components/QrCode/QrCode'
 
 import blogFetch from "../../assets/axios/config"
@@ -10,26 +10,18 @@ const Cadastrar = () => {
     const { register, handleSubmit } = useForm()
 
     const navigate = useNavigate()
-    
-    let id = "katon"
 
+    const [id, setId] = useState("")
     
     const onSubmit = async (values) => {
-        //console.log(values)
-        
         values.ranking = 0
-        
-        await blogFetch.post("/cad-competidor", values).then((res) => id = res.data._id)
-        return id
-        //navigate(`/site-card-vite/${id}`)
+        await blogFetch.post("/cad-competidor", values).then((res) => setId(res.data._id))
     }
     
-    useEffect(() =>{
-        console.log("Iuiu")
-    },[id])
-
     return (
         <div>
+
+            <button onClick={() => navigate(`/site-card-vite`)}>Voltar</button>
 
             <form onSubmit={handleSubmit(async (data) => await onSubmit(data))}>
 
@@ -85,7 +77,9 @@ const Cadastrar = () => {
                 <button>Enviar</button>
             </form>
 
-            <QrCode id = {id}/>
+            {
+                id !== "" ? <QrCode id = {id}/> : ""
+            }
 
         </div>
     )

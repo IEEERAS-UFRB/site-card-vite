@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import QRCode from "react-qr-code"
 import QRCodeLink from "qrcode"
@@ -7,21 +7,20 @@ const QrCode = ({id}) => {
 
     console.log(id)
 
-    let newLink = `http://127.0.0.1:5173/site-card-vite/${id}`
+    let newLink = `https://f2f4-200-128-102-253.ngrok.io/${id}`
 
-    const [link, setLink] = useState("")
     const [qrCodeLink, setQrCodeLink] = useState("")
 
-    function handleQrCode(e) {
-        setLink(e.target.value)
-        handleGenerateImage(e.target.value)
-    }
+    useEffect(() =>{
+        handleGenerateImage(newLink)
+    }, [newLink])
 
     function handleGenerateImage(link_image) {
         QRCodeLink.toDataURL(link_image, {
             width: 600,
             margin: 3
         }, (error, url) => {
+            console.log("chamada")
             setQrCodeLink(url)
         })
     }
@@ -30,7 +29,6 @@ const QrCode = ({id}) => {
         <>
             <div>
                 <QRCode value={newLink} id="qr-code" />
-                <input type="text" placeholder="link" onChange={(e) => handleQrCode(e)} value={newLink} />
                 <a href={qrCodeLink} download={`qrcode.png`} >baixar qr</a>
             </div>
         </>

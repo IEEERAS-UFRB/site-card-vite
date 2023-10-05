@@ -9,7 +9,7 @@ const Home = () => {
 
     const getPosts = async () => {
         try {
-            const res = await axios.get(`http://localhost:4000/competidor`)
+            const res = await axios.get(`https://f2f4-200-128-102-253.ngrok.io/competidor`)
             const data = res.data
 
             setPosts(data)
@@ -31,7 +31,7 @@ const Home = () => {
                         //colocar um navigate pra ir pra outra pagina quando clicar cno card
                         return (
                             <section key={item._id} id="card"> 
-                                {item._id}
+                                {item.nomeCompetidor}
                             </section>
                         )
                     })
