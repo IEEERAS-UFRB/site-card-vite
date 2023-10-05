@@ -9,7 +9,7 @@ const Home = () => {
 
     const getPosts = async () => {
         try {
-            const res = await axios.get(`https://f2f4-200-128-102-253.ngrok.io/competidor`)
+            const res = await axios.get(`http://localhost:4000/competidor`)
             const data = res.data
 
             setPosts(data)
@@ -18,10 +18,10 @@ const Home = () => {
         }
     }
 
-    const getDelet = (id) =>{
-        const res = axios.delete(`/delet-competidor/${id}`)
+    const getDelet = (id) => {
+        const res = axios.delete(`/delet-competidor/${id}`).then((res) => console.log(res)).catch((error) => console.log(error))
 
-       //console.log(id)
+        //console.log(id)
     }
 
     useEffect(() => {
@@ -42,12 +42,18 @@ const Home = () => {
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
 
+                                <section className="competidor">
+                                    <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                                </section>
+                                <section className="robo">
+                                    <img src={item.linkRobo} />
+                                    {/* <div style={{ backgroundImage: `url(${item.linkRobo})`, backgroundSize: "cover", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div> */}
+                                </section>
                                 <section className="body">
-                                    <section className="competidor-robo"></section>
                                     <section className="content">
-                                        <p>Equipe: <span>{item.equipe}</span></p>
-                                        <p>Modalidade: <span>{item.modalidade}</span></p>
-                                        <p>Instituição: <span>{item.instituicao}</span></p>
+                                        <p><b>Equipe:</b> <span>{item.equipe}</span></p>
+                                        <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
+                                        <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
                                     </section>
                                 </section>
                             </section>

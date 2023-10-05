@@ -7,7 +7,7 @@ const QrCode = ({id}) => {
 
     console.log(id)
 
-    let newLink = `https://f2f4-200-128-102-253.ngrok.io/${id}`
+    let newLink = `http://localhost:4000/${id}`
 
     const [qrCodeLink, setQrCodeLink] = useState("")
 
