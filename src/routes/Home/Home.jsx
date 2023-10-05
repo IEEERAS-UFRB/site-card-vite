@@ -18,9 +18,15 @@ const Home = () => {
         }
     }
 
+    const getDelet = (id) =>{
+        const res = axios.delete(`/delet-competidor/${id}`)
+
+       //console.log(id)
+    }
+
     useEffect(() => {
         getPosts()
-    }, [])
+    })
 
     return (
         <>
@@ -30,8 +36,20 @@ const Home = () => {
                     posts.map((item) => {
                         //colocar um navigate pra ir pra outra pagina quando clicar cno card
                         return (
-                            <section key={item._id} id="card"> 
-                                {item.nomeCompetidor}
+                            <section key={item._id} id="card" onClick={() => getDelet(item._id)}>
+                                <section className="header">
+                                    <p>{item.ranking}</p>
+                                    <h5>{item.nomeCompetidor}</h5>
+                                </section>
+
+                                <section className="body">
+                                    <section className="competidor-robo"></section>
+                                    <section className="content">
+                                        <p>Equipe: <span>{item.equipe}</span></p>
+                                        <p>Modalidade: <span>{item.modalidade}</span></p>
+                                        <p>Instituição: <span>{item.instituicao}</span></p>
+                                    </section>
+                                </section>
                             </section>
                         )
                     })
