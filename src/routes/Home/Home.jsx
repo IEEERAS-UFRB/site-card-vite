@@ -3,8 +3,10 @@ import axios from "axios"
 import "./style.css"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../../assets/axios/config";
 
 const Home = () => {
+
 
     const [posts, setPosts] = useState([])
 
@@ -12,7 +14,7 @@ const Home = () => {
 
     const getPosts = async () => {
         try {
-            const res = await axios.get(`http://localhost:4000/competidor`)
+            const res = await axios.get(`${baseURL}/competidor`)
             const data = res.data
 
             setPosts(data)

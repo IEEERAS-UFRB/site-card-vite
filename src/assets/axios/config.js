@@ -1,7 +1,9 @@
 import axios from "axios"
 
+export const baseURL = "https://1771-179-97-232-14.ngrok.io"
+
 const blogFetch = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: baseURL,
     headers:{
         "Content-Type": "application/json"
     }

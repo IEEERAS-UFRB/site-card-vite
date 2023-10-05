@@ -10,12 +10,12 @@ const Cadastrar = () => {
 
     const { register, handleSubmit } = useForm()
 
-
     const [id, setId] = useState("")
 
     const onSubmit = async (values) => {
         values.ranking = 0
         await blogFetch.post("/cad-competidor", values).then((res) => setId(res.data._id))
+        // values.linkQR = `http://localhost:4000/site-card-vite/${id}`
     }
 
     return (

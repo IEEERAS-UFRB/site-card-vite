@@ -4,12 +4,13 @@ import QRCode from "react-qr-code"
 import QRCodeLink from "qrcode"
 
 import "./style.css"
+import { baseURL } from "../../assets/axios/config"
 
 const QrCode = ({id}) => {
 
     console.log(id)
 
-    let newLink = `http://localhost:4000/${id}`
+    let newLink = `${baseURL}/${id}`
 
     const [qrCodeLink, setQrCodeLink] = useState("")
 
