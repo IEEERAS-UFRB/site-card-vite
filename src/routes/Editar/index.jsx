@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../assets/axios/config";
 
-const Home = () => {
+const Editar = () => {
 
 
     const [posts, setPosts] = useState([])
@@ -35,7 +35,7 @@ const Home = () => {
                     posts.map((item) => {
                         //colocar um navigate pra ir pra outra pagina quando clicar cno card
                         return (
-                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`) }>
+                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/editar/${item._id}`) }>
                                 <section className="header">
                                     <p>{item.ranking}</p>
                                     <h5>{item.nomeCompetidor}</h5>
@@ -63,4 +63,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Editar;

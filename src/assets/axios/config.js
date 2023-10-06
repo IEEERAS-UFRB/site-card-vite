@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseURL = "https://1771-179-97-232-14.ngrok.io"
+export const baseURL = "http://localhost:4000"
 
 const blogFetch = axios.create({
     baseURL: baseURL,

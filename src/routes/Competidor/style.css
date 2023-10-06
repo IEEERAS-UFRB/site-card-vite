@@ -5,3 +5,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.container-card-comp{
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+#qr-code-comp{
+    width: 200px;
+    height: 200px;
+}

@@ -8,6 +8,9 @@ import App from "./App"
 import Home from './routes/Home/Home.jsx'
 import Competidor from './routes/Competidor/Competidor.jsx'
 import Cadastrar from './routes/Cadastrar/index.jsx'
+import Remover from './routes/Remover'
+import Editar from './routes/Editar'
+import EditCompetidor from './routes/EditCompetidor'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "/site-card-vite/cadastrar",
         element: <Cadastrar/>
+      },
+      {
+        path: "/site-card-vite/remover",
+        element: <Remover />
+      },
+      {
+        path: "/site-card-vite/editar",
+        element: <Editar />
+      },
+      {
+        path:"/site-card-vite/editar/:id",
+        element: <EditCompetidor />
       }
     ]
   }

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { baseURL } from "../../assets/axios/config";
 
 import "./style.css"
+import QRCode from "react-qr-code";
 
 const Competidor = () => {
 
@@ -12,13 +13,13 @@ const Competidor = () => {
     const [item, setItem] = useState({})
 
     useEffect(() => {
-        axios.get(`${baseURL}/competidor/${id}`).then((res) =>{
+        axios.get(`${baseURL}/competidor/${id}`).then((res) => {
             setItem(res.data)
         })
-    }, [item])
+    }, [])
 
     return (
-        <div className="container-card">
+        <div className="container-card container-card-comp">
             <section key={id} id="card">
                 <section className="header">
                     <p>{item.ranking}</p>
@@ -40,17 +41,8 @@ const Competidor = () => {
                 </section>
             </section>
 
-            <section  id="card">
-                <section className="header">
-                    <p>{item.ranking}</p>
-                    <h5>{item.nomeCompetidor}</h5>
-                </section>
-
-                <section className="competidor">
-                    <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
-                </section>
-                
-                
+            <section className="competidor">
+                <QRCode value={`${baseURL}/${id}`} id="qr-code-comp" />
             </section>
         </div>
     )
