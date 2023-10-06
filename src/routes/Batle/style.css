@@ -1,0 +1,55 @@
+#container-batle{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card-modalidade{
+    background: #fff;
+    height: 50vh;
+    width: 20vw;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:5px;
+}
+
+.unico,
+.duplo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.unico section,
+.duplo section{
+    background-color: aqua;
+    width: 100%;
+    margin: 5px auto;
+    height: 80%;
+}
+
+.unico section{
+    height: 100%;
+}
+
+@media (max-width: 450px) {
+    #container-batle{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: auto;
+    }
+
+    .card-modalidade{
+        min-width: 70vw;
+        height: 50vh;
+    }
+}

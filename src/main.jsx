@@ -11,6 +11,10 @@ import Cadastrar from './routes/Cadastrar/index.jsx'
 import Remover from './routes/Remover'
 import Editar from './routes/Editar'
 import EditCompetidor from './routes/EditCompetidor'
+import Batle from './routes/Batle'
+import Modalidade from './routes/Modalidade'
+import CadBatle from './routes/CadBatle'
+import Editbatle from './routes/EditBatle'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +44,22 @@ const router = createBrowserRouter([
       {
         path:"/site-card-vite/editar/:id",
         element: <EditCompetidor />
+      },
+      {
+        path: "/site-card-vite/batle",
+        element: <Batle />
+      },
+      {
+        path: "/site-card-vite/batle/:modalidade",
+        element: <Modalidade />
+      },
+      {
+        path: "/site-card-vite/batle/:modalidade/cadastrar",
+        element: <CadBatle />
+      },
+      {
+        path: "/site-card-vite/batle/:modalidade/editar",
+        element: <Editbatle />
       }
     ]
   }
