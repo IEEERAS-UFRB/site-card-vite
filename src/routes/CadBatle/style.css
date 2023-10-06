@@ -12,6 +12,9 @@
     width: 90vw;
     height: 60vh;
     background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .min-card:hover{
@@ -70,6 +73,7 @@
 }
 
 .min-card{
+    animation: ease-in;
     width: 150px;
     height: 200px;
     margin: 20px;
@@ -84,6 +88,15 @@
     font-family: sans-serif;
     border: 2px solid #63b4ff;
     box-shadow: 0 0 15px #63b4ff, inset 0 0 15px #63b4ff;
+}
+
+.min-card .robo img{
+    width: 30px;
+    height: 30px;
+}
+
+.min-card .body .content{
+    font-size: 8pt;
 }
 
 @media (max-width: 450px){
