@@ -4,8 +4,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { baseURL } from "../../../assets/axios/config";
 
-
 import "./style.css"
+
 const FollowLine = ({ item }) => {
 
     console.log(item)
@@ -19,9 +19,6 @@ const FollowLine = ({ item }) => {
             await axios.put(`${baseURL}/edit-competidor/${item._id}`, item).
                 then((res) => console.log(res.data))
         }
-
-        //await axios.put("/cad-competidor", values).then((res) => setId(res.data._id))
-        // values.linkQR = `http://localhost:4000/site-card-vite/${id}`
     }
 
     return (
