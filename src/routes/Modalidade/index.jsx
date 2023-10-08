@@ -4,11 +4,11 @@ import axios from "axios";
 import { baseURL } from "../../assets/axios/config";
 
 import "./style.css"
-import MegaSumo from "../Modalidades/MegaSumo";
 import MegaSumoTelao from "../Modalidades/MegaSumoTelao";
 import FollowLineTelao from "../Modalidades/FollowLineTelao";
 import Ranking from "../../components/Ranking";
 import MiniSumoTelao from "../Modalidades/MiniSumoTelao";
+import RobocodeTelao from "../Modalidades/RobocodeTelao";
 
 const Modalidade = () => {
     const { modalidade } = useParams()
@@ -27,6 +27,10 @@ const Modalidade = () => {
                 })
             }else if( modalidade.match("Mini")){
                 axios.get(`${baseURL}/round-mini`).then((res) => {
+                    newComp(res.data.pop())
+                })
+            }else if( modalidade.match("code")){
+                axios.get(`${baseURL}/round-code`).then((res) => {
                     newComp(res.data.pop())
                 })
             }
@@ -59,6 +63,8 @@ const Modalidade = () => {
                 axios.get(`${baseURL}/vitoria`).then((res) => newVenc(res.data.pop()))
             } else if(modalidade.match("Mini")){
                 axios.get(`${baseURL}/vitoria-mini`).then((res) => newVenc(res.data.pop()))
+            }else if(modalidade.match("code")){
+                axios.get(`${baseURL}/vitoria-code`).then((res) => newVenc(res.data.pop()))
             }
         }
     }, [])
@@ -80,7 +86,7 @@ const Modalidade = () => {
                     <>
                         {modalidade.match("Mega") ? <MegaSumoTelao competidores={competidores} vencedor={vencedor} /> : ""}
                         {modalidade.match("Mini") ? <MiniSumoTelao competidores={competidores} vencedor={vencedor}/> : ""}
-                        {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""}
+                        {modalidade.match("Robocode") ? <RobocodeTelao competidores={competidores} vencedor={vencedor} /> : ""}
                     </>
                 ) : ((modalidade === "Follow Line") ? (
                     competidores.map((item) => {

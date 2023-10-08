@@ -8,6 +8,7 @@ import FollowLine from "../Modalidades/FollowLine";
 import MegaSumo from "../Modalidades/MegaSumo";
 import Ranking from "../../components/Ranking";
 import MiniSumo from "../Modalidades/MiniSumo";
+import Robocode from "../Modalidades/Robocode";
 
 const CadBatle = () => {
     const { modalidade } = useParams()
@@ -73,6 +74,11 @@ const CadBatle = () => {
                 axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
             }
 
+            else if(modalidade.match("Robocode")){
+                axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+
+            }
+
             console.log("batalha entre: " + batalha[0].nomeRobo + " VS " + batalha[1].nomeRobo)
         }
         setComecar(true)
@@ -88,6 +94,8 @@ const CadBatle = () => {
             axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria).then((item) => console.log(item))
         }else if(modalidade.match("Mini")){
             axios.put(`${baseURL}/edit-vitoria-mini/${vitoria._id}`, vitoria).then((item) => console.log(item))
+        }else if(modalidade.match("Robocode")){
+            axios.put(`${baseURL}/edit-vitoria-code/${vitoria._id}`, vitoria).then((item) => console.log(item))
         }
 
         navigate(`/site-card-vite/batle/${modalidade}/cadastrar`)
@@ -101,7 +109,7 @@ const CadBatle = () => {
                     <>
                         {modalidade.match("Mega") ? <MegaSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
                         {modalidade.match("Mini") ? <MiniSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
-                        {/* {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""} */}
+                        {modalidade.match("Robocode") ? <Robocode  batalha={batalha} comecar={comecar} reboot={reboot} fim={fim}/> : ""}
                     </>
                 ) : ((modalidade === "Follow Line" && batalha.length === 1) ? (
                     batalha.map((item) => {
