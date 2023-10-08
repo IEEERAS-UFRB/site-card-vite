@@ -32,8 +32,8 @@ const CadBatle = () => {
     const escolherCompetidores = (item) => {
 
         if (modalidade != "Follow Line" & batalha.length < 2) {
-            if(batalha[0]){
-                if(batalha[0]._id !== item._id){
+            if (batalha[0]) {
+                if (batalha[0]._id !== item._id) {
                     const newBatle = [
                         ...batalha,
                         item
@@ -56,14 +56,14 @@ const CadBatle = () => {
     const fight = () => {
         if (batalha.length === 1) {
             batalha.map((item) => {
+                axios.post(`${baseURL}/volta`, { comp1: batalha[0] }).then((res) => console.log(res.data))
                 console.log("Corrida do robô: " + item.nomeRobo)
             })
         } else if (batalha.length === 2) {
-
-            axios.post(`${baseURL}/round`, {comp1: batalha[0], comp2: batalha[1]}).then((res) => console.log(res.data))
+            axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
             console.log("batalha entre: " + batalha[0].nomeRobo + " VS " + batalha[1].nomeRobo)
-            setComecar(true)
         }
+        setComecar(true)
     }
 
     const removerCompetidores = () => {
@@ -72,31 +72,29 @@ const CadBatle = () => {
 
         vitoria.acabou = true
 
-        console.log(vitoria)
-
         axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria).then((item) => console.log(item))
-        
+
     }
 
     return (
         <>
-            <section id="arena">
+            <section className="arena">
                 {(batalha.length < 3 && modalidade !== "Follow Line") ? ( //chamar cada compoente modalidade pra ficar uma melhor visualização, visto que serão itens diferentes
                     <>
-                        {modalidade.match("Mega") ? <MegaSumo batalha={batalha} comecar={comecar} reboot ={reboot} fim = {fim} /> : ""}
+                        {modalidade.match("Mega") ? <MegaSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
                         {/* {modalidade.match("Mini") ? <MegaSumo item={item} /> : ""}
                         {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""} */}
                     </>
                 ) : ((modalidade === "Follow Line" && batalha.length === 1) ? (
                     batalha.map((item) => {
                         return (
-                            <FollowLine key={item._id} item={item} />
+                            <FollowLine key={item._id} item={item} comecar={comecar}/>
                         )
                     })) : console.log("não"))}
             </section>
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
                 <button onClick={() => fight()} >Começar</button>
-                <button onClick={() => removerCompetidores()} >reiniciar</button>
+                {modalidade === "Follow Line" ? "" : <button onClick={() => removerCompetidores()} >reiniciar</button>}
             </section>
             <section id="continer-cards-batle">
                 {competidores.map((item) => {

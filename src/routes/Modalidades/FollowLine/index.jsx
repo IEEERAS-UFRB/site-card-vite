@@ -6,18 +6,17 @@ import { baseURL } from "../../../assets/axios/config";
 
 import "./style.css"
 
-const FollowLine = ({ item }) => {
+const FollowLine = ({ item, comecar }) => {
 
-    console.log(item)
+    console.log(comecar)
 
     const { register, handleSubmit } = useForm()
 
     const onSubmit = async (values) => {
 
         if (values.tempo < item.pontuacao || item.pontuacao === 0 || item.pontuacao === "" || item.pontuacao === undefined) {
-            item.pontuacao = values.tempo
-            await axios.put(`${baseURL}/edit-competidor/${item._id}`, item).
-                then((res) => console.log(res.data))
+            await axios.post(`${baseURL}/volta`, { comp1: item, tempo: values.tempo }).
+                then((res) => console.log(res))
         }
     }
 
@@ -27,10 +26,12 @@ const FollowLine = ({ item }) => {
             <section className="pista">
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
 
-                <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
-                    <input type="text" name="tempo" placeholder="tempo percorrido"  {...register("tempo")} />
-                    <button>salvar</button>
-                </form>
+                {!comecar ? "" : (
+                    <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
+                        <input type="text" name="tempo" placeholder="tempo percorrido"  {...register("tempo")} />
+                        <button>salvar</button>
+                    </form>
+                )}
             </section>
 
             <section id="info-follow">
