@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../assets/axios/config";
 
@@ -7,6 +7,7 @@ import "./style.css"
 import FollowLine from "../Modalidades/FollowLine";
 import MegaSumo from "../Modalidades/MegaSumo";
 import Ranking from "../../components/Ranking";
+import MiniSumo from "../Modalidades/MiniSumo";
 
 const CadBatle = () => {
     const { modalidade } = useParams()
@@ -20,6 +21,8 @@ const CadBatle = () => {
     const [reboot, setReboot] = useState(false)
 
     const [vitoria, setVitoria] = useState([])
+
+    const navigate = useNavigate()
 
     const fim = (item) => {
         console.log(item)
@@ -61,7 +64,15 @@ const CadBatle = () => {
                 console.log("Corrida do robô: " + item.nomeRobo)
             })
         } else if (batalha.length === 2) {
-            axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+
+            if(modalidade.match("Mega")){
+                axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+            }
+            
+            else if(modalidade.match("Mini")){
+                axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+            }
+
             console.log("batalha entre: " + batalha[0].nomeRobo + " VS " + batalha[1].nomeRobo)
         }
         setComecar(true)
@@ -73,7 +84,13 @@ const CadBatle = () => {
 
         vitoria.acabou = true
 
-        axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria).then((item) => console.log(item))
+        if(modalidade.match("Mega")){
+            axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria).then((item) => console.log(item))
+        }else if(modalidade.match("Mini")){
+            axios.put(`${baseURL}/edit-vitoria-mini/${vitoria._id}`, vitoria).then((item) => console.log(item))
+        }
+
+        navigate(`/site-card-vite/batle/${modalidade}/cadastrar`)
 
     }
 
@@ -83,8 +100,8 @@ const CadBatle = () => {
                 {(batalha.length < 3 && modalidade !== "Follow Line") ? ( //chamar cada compoente modalidade pra ficar uma melhor visualização, visto que serão itens diferentes
                     <>
                         {modalidade.match("Mega") ? <MegaSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
-                        {/* {modalidade.match("Mini") ? <MegaSumo item={item} /> : ""}
-                        {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""} */}
+                        {modalidade.match("Mini") ? <MiniSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
+                        {/* {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""} */}
                     </>
                 ) : ((modalidade === "Follow Line" && batalha.length === 1) ? (
                     batalha.map((item) => {

@@ -9,7 +9,7 @@ const Ranking = ({souCad}) => {
     const { modalidade } = useParams()
 
     const [ranking, setRanking] = useState([])
-    // const [vitoria, setVitoria] = useState([])
+    //  const [vitoria, setVitoria] = useState([])
 
     useEffect(() => {
         if (modalidade.match("Follow Line")) {
@@ -20,7 +20,9 @@ const Ranking = ({souCad}) => {
 
             // console.log(vitoria)
         } else if (modalidade.match("Mini")) {
-
+            axios.get(`${baseURL}/round-mini`).then((res) => { 
+                console.log(res.data)
+                setRanking(res.data) })
         } else if (modalidade.match("Robocode")) {
 
         }

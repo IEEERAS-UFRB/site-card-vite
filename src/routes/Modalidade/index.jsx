@@ -8,6 +8,7 @@ import MegaSumo from "../Modalidades/MegaSumo";
 import MegaSumoTelao from "../Modalidades/MegaSumoTelao";
 import FollowLineTelao from "../Modalidades/FollowLineTelao";
 import Ranking from "../../components/Ranking";
+import MiniSumoTelao from "../Modalidades/MiniSumoTelao";
 
 const Modalidade = () => {
     const { modalidade } = useParams()
@@ -20,9 +21,15 @@ const Modalidade = () => {
     useEffect(() => {
 
         if (modalidade !== "Follow Line") {
-            axios.get(`${baseURL}/round`).then((res) => {
-                newComp(res.data.pop())
-            })
+            if(modalidade.match("Mega")){
+                axios.get(`${baseURL}/round`).then((res) => {
+                    newComp(res.data.pop())
+                })
+            }else if( modalidade.match("Mini")){
+                axios.get(`${baseURL}/round-mini`).then((res) => {
+                    newComp(res.data.pop())
+                })
+            }
         } else {
             axios.get(`${baseURL}/volta`).then((res) => {
                 newComp(res.data.pop())
@@ -48,7 +55,11 @@ const Modalidade = () => {
 
     useEffect(() => {
         if (modalidade !== "Follow Line") {
-            axios.get(`${baseURL}/vitoria`).then((res) => newVenc(res.data.pop()))
+            if(modalidade.match("Mega")){
+                axios.get(`${baseURL}/vitoria`).then((res) => newVenc(res.data.pop()))
+            } else if(modalidade.match("Mini")){
+                axios.get(`${baseURL}/vitoria-mini`).then((res) => newVenc(res.data.pop()))
+            }
         }
     }, [])
 
@@ -59,8 +70,6 @@ const Modalidade = () => {
             item
         ]
 
-        console.log(item)
-
         setVencedor(Venc)
     }
 
@@ -70,7 +79,7 @@ const Modalidade = () => {
                 {(modalidade !== "Follow Line") ? (
                     <>
                         {modalidade.match("Mega") ? <MegaSumoTelao competidores={competidores} vencedor={vencedor} /> : ""}
-                        {modalidade.match("Mini") ? <MegaSumo item={item} /> : ""}
+                        {modalidade.match("Mini") ? <MiniSumoTelao competidores={competidores} vencedor={vencedor}/> : ""}
                         {modalidade.match("Robocode") ? <MegaSumo item={item} /> : ""}
                     </>
                 ) : ((modalidade === "Follow Line") ? (
