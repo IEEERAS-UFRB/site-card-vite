@@ -7,6 +7,7 @@ import "./style.css"
 import MegaSumo from "../Modalidades/MegaSumo";
 import MegaSumoTelao from "../Modalidades/MegaSumoTelao";
 import FollowLineTelao from "../Modalidades/FollowLineTelao";
+import Ranking from "../../components/Ranking";
 
 const Modalidade = () => {
     const { modalidade } = useParams()
@@ -79,6 +80,8 @@ const Modalidade = () => {
                         )
                     })) : console.log("não"))}
             </section>
+
+            <Ranking souCad={false}/>
         </>
     )
 }

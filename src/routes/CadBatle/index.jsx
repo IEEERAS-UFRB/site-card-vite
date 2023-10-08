@@ -6,6 +6,7 @@ import { baseURL } from "../../assets/axios/config";
 import "./style.css"
 import FollowLine from "../Modalidades/FollowLine";
 import MegaSumo from "../Modalidades/MegaSumo";
+import Ranking from "../../components/Ranking";
 
 const CadBatle = () => {
     const { modalidade } = useParams()
@@ -124,6 +125,8 @@ const CadBatle = () => {
                     }
                 })}
             </section>
+
+            <Ranking souCad={true} />
         </>
     )
 }

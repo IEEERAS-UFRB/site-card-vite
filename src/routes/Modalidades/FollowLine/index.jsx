@@ -8,14 +8,14 @@ import "./style.css"
 
 const FollowLine = ({ item, comecar }) => {
 
-    console.log(comecar)
+    console.log(item)
 
     const { register, handleSubmit } = useForm()
 
     const onSubmit = async (values) => {
 
         if (values.tempo < item.pontuacao || item.pontuacao === 0 || item.pontuacao === "" || item.pontuacao === undefined) {
-            await axios.post(`${baseURL}/volta`, { comp1: item, tempo: values.tempo }).
+            await axios.post(`${baseURL}/volta`, { comp1: item, tempo: {tempo1: values.tempo, tempo2: "--", tempo3: "--"} }).
                 then((res) => console.log(res))
         }
     }

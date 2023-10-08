@@ -8,8 +8,6 @@ import "./style.css"
 
 const FollowLineTelao = ({ item }) => {
 
-    console.log(item)
-
     //const { register, handleSubmit } = useForm()
 
     // const onSubmit = async (values) => {
@@ -22,11 +20,22 @@ const FollowLineTelao = ({ item }) => {
     // }
 
     return (
-        <section  className="container-follow-espec">
+        <section className="container-follow-espec">
 
-            <section className="espectador" style={{justifyContent: "space-around"}}>
+            <section className="espectador" style={{ justifyContent: "space-around" }}>
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
-                <div style={{color: "#fff"}}>{item.tempo}s</div>
+                <div style={{ color: "#fff" }}>
+                    {
+                        item.tempo.tempo2 === "--" ?
+                            item.tempo.tempo1 :
+                            (item.tempo.tempo1 < item.tempo.tempo2 ?
+                                <p>{item.tempo.tempo1}</p> :
+                                (item.tempo.tempo3 === '--') ?
+                                    <p>{item.tempo.tempo2}</p> :
+                                    (item.tempo.tempo2 < item.tempo.tempo3 ?
+                                        item.tempo.tempo2 :
+                                        item.tempo.tempo3))
+                    } s</div>
             </section>
 
             <section id="info-follow-espec">
