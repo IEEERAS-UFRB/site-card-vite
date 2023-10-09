@@ -7,6 +7,7 @@ const Nav = () =>{
         <ul>
             <li> <a href="/site-card-vite">home</a> </li>
             <li> <a href="/site-card-vite/batle">Partidas</a> </li>
+            <li> <a href="/site-card-vite/ranking">Ranking</a> </li>
         </ul>
     )
 }
