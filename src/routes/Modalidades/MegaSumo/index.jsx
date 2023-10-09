@@ -48,7 +48,6 @@ const MegaSumo = ({ batalha, comecar, reboot, fim }) => {
                     fim({ _id: res.data._id, comp: res.data.comp, acabou: false })
                 }).catch((err) => console.log(err))
                 setVencedor(res.data)
-
             })
         }
     }, [vitoria !== "" && vitoria !== "empate"])

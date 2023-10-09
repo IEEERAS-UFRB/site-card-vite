@@ -6,7 +6,7 @@ import { baseURL } from "../../assets/axios/config";
 import "./style.css"
 import FollowLine from "../Modalidades/FollowLine";
 import MegaSumo from "../Modalidades/MegaSumo";
-import Ranking from "../../components/Ranking";
+import ListaVencedores from "../../components/ListaVencedores";
 import MiniSumo from "../Modalidades/MiniSumo";
 import Robocode from "../Modalidades/Robocode";
 
@@ -26,7 +26,8 @@ const CadBatle = () => {
     const navigate = useNavigate()
 
     const fim = (item) => {
-        console.log(item)
+        item.comp.pontuacao === 0 ? item.comp.pontuacao = 1 : item.comp.pontuacao += 1
+        axios.put(`${baseURL}/edit-competidor/${item.comp._id}`, item.comp).then((res) => console.log(res.data))
         setVitoria(item)
     }
 
@@ -151,7 +152,7 @@ const CadBatle = () => {
                 })}
             </section>
 
-            <Ranking souCad={true} />
+            <ListaVencedores souCad={true} />
         </>
     )
 }

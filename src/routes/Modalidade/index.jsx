@@ -6,7 +6,7 @@ import { baseURL } from "../../assets/axios/config";
 import "./style.css"
 import MegaSumoTelao from "../Modalidades/MegaSumoTelao";
 import FollowLineTelao from "../Modalidades/FollowLineTelao";
-import Ranking from "../../components/Ranking";
+import ListaVencedores from "../../components/ListaVencedores";
 import MiniSumoTelao from "../Modalidades/MiniSumoTelao";
 import RobocodeTelao from "../Modalidades/RobocodeTelao";
 
@@ -96,7 +96,7 @@ const Modalidade = () => {
                     })) : console.log("não"))}
             </section>
 
-            <Ranking souCad={false}/>
+            <ListaVencedores souCad={false}/>
         </>
     )
 }
