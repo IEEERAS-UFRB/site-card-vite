@@ -21,7 +21,7 @@ const FollowLine = ({ item, comecar }) => {
         voltas.map((key) => {
             if (key.tempo) {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
-                    if (res.data.comp1._id === item._id) {
+                    if (res.data.comp1._id === item._id || res.data.comp1._id === item.comp1._id) {
                         if (res.data.tempo.tempo1 === "--") {
                             axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
                         } else {
@@ -36,7 +36,7 @@ const FollowLine = ({ item, comecar }) => {
                 })
             } else {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
-                    if (res.data.comp1._id === item._id) {
+                    if (res.data.comp1._id === item._id || res.data.comp1._id === item.comp1._id) {
                         axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
                     }
                 })
@@ -60,23 +60,31 @@ const FollowLine = ({ item, comecar }) => {
             </section>
 
             <section id="info-follow">
-                <section className="min-card" key={item._id}>
+                <section className="min-card" key={item._id ? item._id : item.comp1._id}>
                     <section className="header">
-                        <p>{item.ranking}</p>
-                        <h5>{item.nomeCompetidor}</h5>
+                        <p>{item.ranking ? item.ranking : item.comp1.ranking}</p>
+                        <h5>{item.nomeCompetidor ? item.nomeCompetidor : item.comp1.nomeCompetidor}</h5>
                     </section>
 
                     <section className="competidor">
-                        <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                        {item.linkGif ? (
+                            <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                        ) : (
+                            <div style={{ backgroundImage: `url(${item.comp1.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                        )}
                     </section>
                     <section className="robo">
-                        <img src={item.linkRobo} />
+                        {item.linkRobo ? (
+                            <img src={item.linkRobo} />
+                        ) : (
+                            <img src={item.comp1.linkRobo} />
+                        )}
                     </section>
                     <section className="body">
                         <section className="content">
-                            <p><b>Equipe:</b> <span>{item.equipe}</span></p>
-                            <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
-                            <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
+                            <p><b>Equipe:</b> <span>{item.equipe ? item.equipe : item.comp1.equipe}</span></p>
+                            <p><b>Modalidade:</b> <span>{item.modalidade ? item.modalidade : item.comp1.modalidade}</span></p>
+                            <p><b>Instituição:</b> <span>{item.instituicao ? item.instituicao : item.comp1.instituicao}</span></p>
                         </section>
                     </section>
                 </section>

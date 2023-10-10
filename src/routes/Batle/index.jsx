@@ -13,16 +13,14 @@ const Batle = () => {
         <div id="container-batle">
             <section className="card-modalidade">
                 <h2>{modalidades[0]}</h2>
-                <div className="duplo">
+                <div className="unico">
                     <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[0]}`)}></section>
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[1]}`)}></section>
                 </div>
             </section>
             <section className="card-modalidade">
                 <h2>{modalidades[2]}</h2>
-                <div className="duplo">
+                <div className="unico">
                     <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[2]}`)}></section>
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[3]}`)}></section>
                 </div>
             </section>
             <section className="card-modalidade">

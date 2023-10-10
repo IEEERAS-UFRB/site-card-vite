@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { baseURL } from "../../assets/axios/config"
 import "./style.css"
@@ -10,6 +10,8 @@ const ListaVencedores = ({ souCad }) => {
 
     const [ranking, setRanking] = useState([])
     const [vitoria, setVitoria] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (modalidade.match("Follow Line")) {
@@ -39,15 +41,15 @@ const ListaVencedores = ({ souCad }) => {
                 Partidas Ateriores:
             </h1>
             <section className="resultado">
-                <section style={{ borderRight: "2px solid #fff", padding: "5px" }}>
-                    Partida
+                <section style={{ borderRight: "2px solid #fff", padding: "5px", color: "#fff" }}>
+                    {modalidade.match("Follow")? <p>Corredor</p> : <p>Partida</p> }
                     {ranking.map((key) => {
                         if (key.comp1) {
                             return (
                                 <ul key={key._id} className="table" style={{ width: "auto" }}>
                                     <ol style={{ color: "#fff" }}>
-                                        {key.comp1.nomeCompetidor}
-                                        {modalidade.match("Follow") ? "" : " Vs " + key.comp2.nomeCompetidor}
+                                        <span onClick={() => navigate(`/site-card-vite/${key.comp1._id}`)}> {key.comp1.nomeCompetidor} </span> 
+                                        {modalidade.match("Follow") ? "" : <span onClick={() => navigate(`/site-card-vite/${key.comp2._id}`)}> {key.comp2.nomeCompetidor} </span> }
                                         {souCad ? " | " + key._id : ""}
                                     </ol>
                                 </ul>
@@ -56,17 +58,38 @@ const ListaVencedores = ({ souCad }) => {
                     })}
                 </section>
                 <section style={{ borderLeft: "2px solid #fff", padding: "10px" }}>
-                    Vencedor:
-                    {vitoria.map((key) => {
+                    {modalidade.match("Follow") ? (
+                        <section style={{color: "#fff"}}>
+                            Tempo:
+                            {ranking.map((key) => {
+                                if (key.tempo) {
+                                    return (
+                                        <ul className="table" style={{ width: "auto" }}>
+                                            <ol style={{ color: "#fff", display: "flex", justifyContent: "space-between", width: "100%" }}>
+                                                <p> {key.tempo.tempo1 !== "--" ? key.tempo.tempo1 : "--"} </p>
+                                                <p> {key.tempo.tempo2 !== "--" ? key.tempo.tempo2 : "--"}</p>
+                                                <p> {key.tempo.tempo3 !== "--" ? key.tempo.tempo3 : "--"}</p>
+                                            </ol>
+                                        </ul>
+                                    )
+                                }
+                            })}
+                        </section>
+                    ) : (
+                        <section style={{color: "#fff"}}>
+                            Vencedor:
+                            {vitoria.map((key) => {
 
-                        return (
-                            <ul className="table" style={{ width: "auto" }}>
-                                <ol style={{ color: "#fff" }}>
-                                    {key.comp.nomeCompetidor}
-                                </ol>
-                            </ul>
-                        )
-                    })}
+                                return (
+                                    <ul className="table" style={{ width: "auto" }}>
+                                        <ol style={{ color: "#fff" }}>
+                                            {key.comp.nomeCompetidor}
+                                        </ol>
+                                    </ul>
+                                )
+                            })}
+                        </section>
+                    )}
                 </section>
             </section>
         </>

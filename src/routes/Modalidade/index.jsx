@@ -44,15 +44,17 @@ const Modalidade = () => {
 
     const newComp = (item) => {
 
-        if (modalidade !== "Follow Line") {
-            const Comp = [
-                ...competidores,
-                item.comp1,
-                item.comp2
-            ]
-            setCompetidores(Comp)
-        } else {
-            setCompetidores([item])
+        if(item){
+            if (modalidade !== "Follow Line") {
+                const Comp = [
+                    ...competidores,
+                    item.comp1,
+                    item.comp2
+                ]
+                setCompetidores(Comp)
+            } else {
+                setCompetidores([item])
+            }
         }
 
     }

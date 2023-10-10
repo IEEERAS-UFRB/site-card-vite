@@ -9,6 +9,7 @@ import MegaSumo from "../Modalidades/MegaSumo";
 import ListaVencedores from "../../components/ListaVencedores";
 import MiniSumo from "../Modalidades/MiniSumo";
 import Robocode from "../Modalidades/Robocode";
+import { useForm } from "react-hook-form";
 
 const CadBatle = () => {
     const { modalidade } = useParams()
@@ -24,6 +25,8 @@ const CadBatle = () => {
     const [vitoria, setVitoria] = useState([])
 
     const navigate = useNavigate()
+
+    const { register, handleSubmit } = useForm()
 
     const fim = (item) => {
         item.comp.pontuacao === 0 ? item.comp.pontuacao = 1 : item.comp.pontuacao += 1
@@ -67,17 +70,16 @@ const CadBatle = () => {
             })
         } else if (batalha.length === 2) {
 
-            if(modalidade.match("Mega")){
+            if (modalidade.match("Mega")) {
                 axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] })
             }
-            
-            else if(modalidade.match("Mini")){
+
+            else if (modalidade.match("Mini")) {
                 axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] })
             }
 
-            else if(modalidade.match("Robocode")){
+            else if (modalidade.match("Robocode")) {
                 axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] })
-
             }
 
             console.log("batalha entre: " + batalha[0].nomeRobo + " VS " + batalha[1].nomeRobo)
@@ -91,11 +93,11 @@ const CadBatle = () => {
 
         vitoria.acabou = true
 
-        if(modalidade.match("Mega")){
+        if (modalidade.match("Mega")) {
             axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria)
-        }else if(modalidade.match("Mini")){
+        } else if (modalidade.match("Mini")) {
             axios.put(`${baseURL}/edit-vitoria-mini/${vitoria._id}`, vitoria)
-        }else if(modalidade.match("Robocode")){
+        } else if (modalidade.match("Robocode")) {
             axios.put(`${baseURL}/edit-vitoria-code/${vitoria._id}`, vitoria)
         }
 
@@ -103,15 +105,21 @@ const CadBatle = () => {
 
     }
 
-    const newVolta = () =>{
+    const newVolta = () => {
         setComecar(!comecar)
         axios.get(`${baseURL}/volta`).then((res) => {
             res.data.map((item) => {
-                if(batalha[0]._id === item.comp1._id || batalha[0].comp1._id === item.comp1._id){
+                if (batalha[0]._id === item.comp1._id || batalha[0].comp1._id === item.comp1._id) {
                     setBatalha([item])
                 }
             })
         })
+    }
+
+    const onSubmit = async (values) => {
+        if(modalidade.match("Follow")){
+            axios.get(`${baseURL}/volta/${values.idPartida}`).then((res) => escolherCompetidores(res.data))
+        }
     }
 
     return (
@@ -121,19 +129,29 @@ const CadBatle = () => {
                     <>
                         {modalidade.match("Mega") ? <MegaSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
                         {modalidade.match("Mini") ? <MiniSumo batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
-                        {modalidade.match("Robocode") ? <Robocode  batalha={batalha} comecar={comecar} reboot={reboot} fim={fim}/> : ""}
+                        {modalidade.match("Robocode") ? <Robocode batalha={batalha} comecar={comecar} reboot={reboot} fim={fim} /> : ""}
                     </>
                 ) : ((modalidade === "Follow Line" && batalha.length === 1) ? (
                     batalha.map((item) => {
                         return (
-                            <FollowLine key={item._id} item={item} comecar={comecar}/>
+                            <FollowLine key={item._id} item={item} comecar={comecar} />
                         )
                     })) : "")}
             </section>
+
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
                 <button onClick={() => fight()} >Começar</button>
                 {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => removerCompetidores()} >reiniciar</button>}
             </section>
+
+            <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
+                <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="recPartida" >
+                    Recuperar partida
+                    <input type="text" name="idPartida" placeholder="id partida"  {...register("idPartida")} />
+                    <button>salvar</button>
+                </form>
+            </section>
+
             <section id="continer-cards-batle">
                 {competidores.map((item) => {
                     if (item.modalidade === modalidade) {

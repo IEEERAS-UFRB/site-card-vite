@@ -13,13 +13,9 @@ const FollowLineTelao = ({ item }) => {
                     {
                         item.tempo.tempo2 === "--" ?
                             item.tempo.tempo1 :
-                            (item.tempo.tempo1 < item.tempo.tempo2 ?
-                                <p>{item.tempo.tempo1}</p> :
-                                (item.tempo.tempo3 === '--') ?
-                                    <p>{item.tempo.tempo2}</p> :
-                                    (item.tempo.tempo2 < item.tempo.tempo3 ?
-                                        item.tempo.tempo2 :
-                                        item.tempo.tempo3))
+                            (item.tempo.tempo3 === '--') ?
+                                item.tempo.tempo2 :
+                                item.tempo.tempo3
                     } s</div>
             </section>
 

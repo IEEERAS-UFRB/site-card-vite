@@ -7,13 +7,13 @@ const MegaSumoTelao = ({ competidores, vencedor }) => {
     const [acabou, setAcabou] = useState(false)
 
     useEffect(() =>{
-
-        vencedor.map((item) =>{
-
-            if(item.acabou){
-                setAcabou(item.acabou)
-            }
-        })
+        if(vencedor[0] !== undefined){
+            vencedor.map((item) =>{
+                if(item.acabou){
+                    setAcabou(item.acabou)
+                }
+            })
+        }
     },[vencedor])
 
     return (
@@ -21,24 +21,28 @@ const MegaSumoTelao = ({ competidores, vencedor }) => {
             {(!acabou) ? (
                 vencedor.map((item) => {
                     return (
-                        <section id="container-sumo" key={item.comp._id}>
+                        <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
                             <section className="min-card" >
                                 <section className="header">
                                     {/* <p>{item.comp.ranking}</p> */}
-                                    <h5>{item.comp.nomeCompetidor}</h5>
+                                    <h5>{vencedor[0] !== undefined ? item.comp.nomeCompetidor : ""}</h5>
                                 </section>
 
                                 <section className="competidor">
-                                    <div style={{ backgroundImage: `url(${item.comp.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                                    {vencedor[0] !== undefined?(
+                                        <div style={{ backgroundImage: `url(${item.comp.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                                    ): ""}
                                 </section>
                                 <section className="robo">
-                                    <img src={item.comp.linkRobo} />
+                                    {vencedor[0] !== undefined ? (
+                                        <img src={item.comp.linkRobo} />
+                                    ): ""}
                                 </section>
                                 <section className="body">
                                     <section className="content">
-                                        <p><b>Equipe:</b> <span>{item.comp.equipe}</span></p>
-                                        <p><b>Modalidade:</b> <span>{item.comp.modalidade}</span></p>
-                                        <p><b>Instituição:</b> <span>{item.comp.instituicao}</span></p>
+                                        <p><b>Equipe:</b> <span>{vencedor[0] !== undefined ? item.comp.equipe : ""}</span></p>
+                                        <p><b>Modalidade:</b> <span>{vencedor[0] !== undefined ? item.comp.modalidade : ""}</span></p>
+                                        <p><b>Instituição:</b> <span>{vencedor[0] !== undefined ? item.comp.instituicao : ""}</span></p>
                                     </section>
                                 </section>
                             </section>
