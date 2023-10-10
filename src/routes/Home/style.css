@@ -73,9 +73,9 @@
     box-shadow: 0 0 25px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: -45px;
-    width: 70px;
-    height: 70px;
+    margin-top: -125px;
+    width: 150px;
+    height: 150px;
 }
 
 @media (max-width: 450px){
@@ -85,7 +85,7 @@
     }
 
     h5{
-        font-size: 20pt;
+        font-size: 25pt;
     }
 
     .competidor{
@@ -96,6 +96,10 @@
         align-items: center;
         justify-content: center;
         margin: auto;
+    }
+
+    .content{
+        font-size: 17pt;
     }
     
     .competidor div{

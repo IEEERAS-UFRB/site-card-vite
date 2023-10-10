@@ -26,13 +26,28 @@ const FollowLine = ({ item, comecar }) => {
                             axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
                         } else {
                             if (res.data.tempo.tempo2 === "--") {
+                                if (res.data.tempo.tempo1 < Number(values.tempo)) {
+                                    key.comp1.pontuacao = res.data.tempo.tempo1
+                                } else {
+                                    key.comp1.pontuacao = Number(values.tempo)
+                                }
                                 axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: values.tempo, tempo3: "--" } })
                             } else {
+                                if (res.data.tempo.tempo2 < Number(values.tempo)) {
+                                    key.comp1.pontuacao = res.data.tempo.tempo2
+                                } else {
+                                    if (res.data.tempo.tempo1 < Number(values.tempo)) {
+                                        key.comp1.pontuacao = res.data.tempo.tempo1
+                                    } else {
+                                        key.comp1.pontuacao = Number(values.tempo)
+                                    }
+                                }
                                 axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: res.data.tempo.tempo2, tempo3: values.tempo } })
                             }
+
+                            axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
                         }
                     }
-
                 })
             } else {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
@@ -62,7 +77,7 @@ const FollowLine = ({ item, comecar }) => {
             <section id="info-follow">
                 <section className="min-card" key={item._id ? item._id : item.comp1._id}>
                     <section className="header">
-                        <p>{item.ranking ? item.ranking : item.comp1.ranking}</p>
+                        {/* <p>{item.ranking ? item.ranking : item.comp1.ranking}</p> */}
                         <h5>{item.nomeCompetidor ? item.nomeCompetidor : item.comp1.nomeCompetidor}</h5>
                     </section>
 

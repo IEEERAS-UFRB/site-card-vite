@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { baseURL } from "../../assets/axios/config";
 
+import "./style.css"
+
 const Ranking = () => {
 
     const [competidores, setCompetidores] = useState([])
@@ -32,32 +34,32 @@ const Ranking = () => {
 
     const sortDataAscending = (field, modalidade) => {
 
-        if(modalidade.match("follow")){
+        if (modalidade.match("follow")) {
             const sortedData = [...follow];
             sortedData.sort((a, b) => {
                 return b[field] - a[field];
             });
             setFollow(sortedData);
-        } else if(modalidade.match("mega")){
+        } else if (modalidade.match("mega")) {
             const sortedData = [...mega];
             sortedData.sort((a, b) => {
                 return b[field] - a[field];
             });
-    
+
             setMega(sortedData);
-        } else if(modalidade.match("mini")){
+        } else if (modalidade.match("mini")) {
             const sortedData = [...mini];
             sortedData.sort((a, b) => {
                 return b[field] - a[field];
             });
-    
+
             setMini(sortedData);
-        } else if(modalidade.match("robocode")){
+        } else if (modalidade.match("robocode")) {
             const sortedData = [...robocode];
             sortedData.sort((a, b) => {
                 return b[field] - a[field];
             });
-    
+
             setRobocode(sortedData);
         }
     };
@@ -76,17 +78,22 @@ const Ranking = () => {
         sortDataAscending('pontuacao', "robocode")
     }, [robocode.length < 1])
 
+    let contFollow = 0, contMega = 0, contMini = 0, contCode = 0
 
     return (
-        <>
+        <section id="table-ranking">
             <section>
-                Follow:
+                <h2>Follow:</h2>
+                <hr />
                 {follow.map((item) => {
+                    contFollow++
                     //handleSort("pontuacao")
                     return (
                         <>
-                            <section key={item._id}>
-                                {item.nomeCompetidor} | {item.pontuacao}
+                            <section key={item._id} className="itens-ranking">
+                                <p style={{width: "10%", textAlign: "center"}}>{contFollow}</p>
+                                <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
+                                <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
                             </section>
                         </>
                     )
@@ -94,39 +101,50 @@ const Ranking = () => {
             </section>
             <br />
             <section>
-                Mega:
+                <h2>Mega:</h2>
+                <hr />
                 {mega.map((item) => {
-
+                    contMega++
                     return (
-                        <section key={item._id}>
-                            {item.nomeCompetidor} | {item.pontuacao}
+                        <section key={item._id} className="itens-ranking">
+                            <p style={{width: "10%", textAlign: "center"}}>{contMega}</p>
+                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
+                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
                         </section>
                     )
                 })}
             </section>
             <br />
             <section>
-                Mini:
+                <h2>Mini:</h2>
+                <hr />
                 {mini.map((item) => {
+                    contMini
                     return (
-                        <section key={item._id}>
-                            {item.nomeCompetidor} | {item.pontuacao}
+                        <section key={item._id} className="itens-ranking">
+                            <p style={{width: "10%", textAlign: "center"}}>{contMini}</p>
+                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
+                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
                         </section>
                     )
                 })}
             </section>
             <br />
             <section>
-                Robocode:
+                <h2>Robocode:</h2>
+                <hr />
                 {robocode.map((item) => {
+                    contCode++
                     return (
-                        <section key={item._id}>
-                            {item.nomeCompetidor} | {item.pontuacao}
+                        <section key={item._id} className="itens-ranking">
+                            <p style={{width: "10%", textAlign: "center"}}>{contCode}</p>
+                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
+                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
                         </section>
                     )
                 })}
             </section>
-        </>
+        </section>
     )
 }
 
