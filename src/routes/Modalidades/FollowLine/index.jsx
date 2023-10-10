@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useForm } from "react-hook-form";
@@ -8,16 +8,43 @@ import "./style.css"
 
 const FollowLine = ({ item, comecar }) => {
 
-    console.log(item)
-
     const { register, handleSubmit } = useForm()
+
+    const [voltas, setVoltas] = useState([])
+
+    useEffect(() => {
+        axios.get(`${baseURL}/volta`).then((res) => setVoltas(res.data))
+    }, [comecar])
 
     const onSubmit = async (values) => {
 
-        if (values.tempo < item.pontuacao || item.pontuacao === 0 || item.pontuacao === "" || item.pontuacao === undefined) {
-            await axios.post(`${baseURL}/volta`, { comp1: item, tempo: {tempo1: values.tempo, tempo2: "--", tempo3: "--"} }).
-                then((res) => console.log(res))
-        }
+        voltas.map((key) => {
+            if (key.tempo) {
+                axios.get(`${baseURL}/volta/${key._id}`).then(res => {
+                    if (res.data.comp1._id === item._id) {
+                        if (res.data.tempo.tempo1 === "--") {
+                            axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
+                        } else {
+                            if (res.data.tempo.tempo2 === "--") {
+                                axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: values.tempo, tempo3: "--" } })
+                            } else {
+                                axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: res.data.tempo.tempo2, tempo3: values.tempo } })
+                            }
+                        }
+                    }
+
+                })
+            } else {
+                axios.get(`${baseURL}/volta/${key._id}`).then(res => {
+                    if (res.data.comp1._id === item._id) {
+                        axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
+                    }
+                })
+
+            }
+        })
+
+        setVoltas([])
     }
 
     return (
@@ -26,12 +53,10 @@ const FollowLine = ({ item, comecar }) => {
             <section className="pista">
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
 
-                {!comecar ? "" : (
-                    <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
-                        <input type="text" name="tempo" placeholder="tempo percorrido"  {...register("tempo")} />
-                        <button>salvar</button>
-                    </form>
-                )}
+                <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
+                    <input type="text" name="tempo" placeholder="tempo percorrido"  {...register("tempo")} />
+                    <button>salvar</button>
+                </form>
             </section>
 
             <section id="info-follow">

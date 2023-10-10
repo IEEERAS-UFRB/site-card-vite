@@ -27,7 +27,7 @@ const CadBatle = () => {
 
     const fim = (item) => {
         item.comp.pontuacao === 0 ? item.comp.pontuacao = 1 : item.comp.pontuacao += 1
-        axios.put(`${baseURL}/edit-competidor/${item.comp._id}`, item.comp).then((res) => console.log(res.data))
+        axios.put(`${baseURL}/edit-competidor/${item.comp._id}`, item.comp)
         setVitoria(item)
     }
 
@@ -62,21 +62,21 @@ const CadBatle = () => {
     const fight = () => {
         if (batalha.length === 1) {
             batalha.map((item) => {
-                axios.post(`${baseURL}/volta`, { comp1: batalha[0] }).then((res) => console.log(res.data))
+                axios.post(`${baseURL}/volta`, { comp1: batalha[0] })
                 console.log("Corrida do robô: " + item.nomeRobo)
             })
         } else if (batalha.length === 2) {
 
             if(modalidade.match("Mega")){
-                axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+                axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] })
             }
             
             else if(modalidade.match("Mini")){
-                axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+                axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] })
             }
 
             else if(modalidade.match("Robocode")){
-                axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] }).then((res) => console.log(res.data))
+                axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] })
 
             }
 
@@ -92,15 +92,26 @@ const CadBatle = () => {
         vitoria.acabou = true
 
         if(modalidade.match("Mega")){
-            axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria).then((item) => console.log(item))
+            axios.put(`${baseURL}/edit-vitoria/${vitoria._id}`, vitoria)
         }else if(modalidade.match("Mini")){
-            axios.put(`${baseURL}/edit-vitoria-mini/${vitoria._id}`, vitoria).then((item) => console.log(item))
+            axios.put(`${baseURL}/edit-vitoria-mini/${vitoria._id}`, vitoria)
         }else if(modalidade.match("Robocode")){
-            axios.put(`${baseURL}/edit-vitoria-code/${vitoria._id}`, vitoria).then((item) => console.log(item))
+            axios.put(`${baseURL}/edit-vitoria-code/${vitoria._id}`, vitoria)
         }
 
         navigate(`/site-card-vite/batle/${modalidade}/cadastrar`)
 
+    }
+
+    const newVolta = () =>{
+        setComecar(!comecar)
+        axios.get(`${baseURL}/volta`).then((res) => {
+            res.data.map((item) => {
+                if(batalha[0]._id === item.comp1._id || batalha[0].comp1._id === item.comp1._id){
+                    setBatalha([item])
+                }
+            })
+        })
     }
 
     return (
@@ -117,11 +128,11 @@ const CadBatle = () => {
                         return (
                             <FollowLine key={item._id} item={item} comecar={comecar}/>
                         )
-                    })) : console.log("não"))}
+                    })) : "")}
             </section>
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
                 <button onClick={() => fight()} >Começar</button>
-                {modalidade === "Follow Line" ? "" : <button onClick={() => removerCompetidores()} >reiniciar</button>}
+                {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => removerCompetidores()} >reiniciar</button>}
             </section>
             <section id="continer-cards-batle">
                 {competidores.map((item) => {

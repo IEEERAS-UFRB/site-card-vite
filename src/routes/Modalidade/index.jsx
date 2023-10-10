@@ -93,7 +93,7 @@ const Modalidade = () => {
                         return (
                             <FollowLineTelao key={item._id} item={item} />
                         )
-                    })) : console.log("não"))}
+                    })) : "")}
             </section>
 
             <ListaVencedores souCad={false}/>

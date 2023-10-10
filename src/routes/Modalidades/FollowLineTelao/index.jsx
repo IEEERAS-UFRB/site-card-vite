@@ -1,23 +1,8 @@
 import React from "react";
-import axios from "axios";
-
-import { useForm } from "react-hook-form";
-import { baseURL } from "../../../assets/axios/config";
 
 import "./style.css"
 
 const FollowLineTelao = ({ item }) => {
-
-    //const { register, handleSubmit } = useForm()
-
-    // const onSubmit = async (values) => {
-
-    //     if (values.tempo < item.pontuacao || item.pontuacao === 0 || item.pontuacao === "" || item.pontuacao === undefined) {
-    //         item.pontuacao = values.tempo
-    //         await axios.put(`${baseURL}/edit-competidor/${item._id}`, item).
-    //             then((res) => console.log(res.data))
-    //     }
-    // }
 
     return (
         <section className="container-follow-espec">

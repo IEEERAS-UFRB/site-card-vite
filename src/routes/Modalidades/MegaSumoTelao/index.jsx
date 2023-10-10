@@ -6,17 +6,12 @@ const MegaSumoTelao = ({ competidores, vencedor }) => {
 
     const [acabou, setAcabou] = useState(false)
 
-    console.log(vencedor)
-    
     useEffect(() =>{
 
         vencedor.map((item) =>{
 
-            console.log(item)
             if(item.acabou){
-
                 setAcabou(item.acabou)
-                console.log(acabou)
             }
         })
     },[vencedor])
