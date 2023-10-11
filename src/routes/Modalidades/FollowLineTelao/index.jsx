@@ -10,13 +10,13 @@ const FollowLineTelao = ({ item }) => {
             <section className="espectador" style={{ justifyContent: "space-around" }}>
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
                 <div style={{ color: "#fff" }}>
-                    {
-                        item.tempo.tempo2 === "--" ?
-                            item.tempo.tempo1 :
-                            (item.tempo.tempo3 === '--') ?
-                                item.tempo.tempo2 :
-                                item.tempo.tempo3
-                    } s</div>
+                    { 
+                        item.tempo.tempo2 === "--" 
+                            ? (item.tempo.tempo1 < 100 ?  "0:" + item.tempo.tempo1 : Math.floor(item.tempo.tempo1 / 100) + ":" + item.tempo.tempo1 % 100)
+                            : (item.tempo.tempo3 === '--') 
+                                ? (item.tempo.tempo2 < 100 ?  "0:" + item.tempo.tempo2 : Math.floor(item.tempo.tempo2 / 100) + ":" + item.tempo.tempo2 % 100)
+                                : (item.tempo.tempo3 < 100 ?  "0:" + item.tempo.tempo3 : Math.floor(item.tempo.tempo3 / 100) + ":" + item.tempo.tempo3 % 100)
+                    } s </div>
             </section>
 
             <section id="info-follow-espec">
