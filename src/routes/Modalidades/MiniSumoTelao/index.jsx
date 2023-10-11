@@ -46,10 +46,6 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
                                     </section>
                                 </section>
                             </section>
-
-                            <section id="container-image-mega-sumo">
-                                <img src="" alt="" />
-                            </section>
                         </section>
                     )
                 })
@@ -76,10 +72,6 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
                                         <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
                                     </section>
                                 </section>
-                            </section>
-
-                            <section id="container-image-mega-sumo">
-                                <img src="" alt="" />
                             </section>
                         </section>
                     )

@@ -40,10 +40,6 @@ const FollowLineTelao = ({ item }) => {
                         </section>
                     </section>
                 </section>
-
-                <section id="container-imagem-robo">
-                    <img src={item.comp1.nomeRobo} alt="" />
-                </section>
             </section>
         </section>
     )

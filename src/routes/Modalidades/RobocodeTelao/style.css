@@ -1,6 +1,5 @@
 .container-robocode{
     display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
     align-items: center;
@@ -29,4 +28,10 @@
 .container-cards-robocode #container-image-mega-sumo{
     width: 70px;
     height: 70px;
+}
+
+@media (max-width: 450px) {
+    .container-robocode{
+        flex-direction: column;
+    }
 }

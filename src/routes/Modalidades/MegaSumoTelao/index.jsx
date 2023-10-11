@@ -46,10 +46,6 @@ const MegaSumoTelao = ({ competidores, vencedor }) => {
                                     </section>
                                 </section>
                             </section>
-
-                            <section id="container-image-mega-sumo">
-                                <img src="" alt="" />
-                            </section>
                         </section>
                     )
                 })
