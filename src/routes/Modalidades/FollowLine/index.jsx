@@ -45,8 +45,10 @@ const FollowLine = ({ item, comecar }) => {
                                 axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: res.data.tempo.tempo2, tempo3: values.tempo } })
                             }
 
-                            axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
                         }
+                        console.log(key.comp1)
+
+                        axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
                     }
                 })
             } else {

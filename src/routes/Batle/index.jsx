@@ -3,7 +3,6 @@ import React from "react";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 
-
 const Batle = () => {
 
     const navigate = useNavigate()

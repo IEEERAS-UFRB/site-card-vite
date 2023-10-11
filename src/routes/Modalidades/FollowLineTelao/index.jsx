@@ -23,7 +23,7 @@ const FollowLineTelao = ({ item }) => {
                 <section className="min-card" key={item.comp1._id}>
                     <section className="header">
                         <p>{item.comp1.ranking}</p>
-                        <h5>{item.comp1.nomeCompetidor}</h5>
+                        <h5 style={{fontSize:"8pt"}}>{item.comp1.nomeCompetidor}</h5>
                     </section>
 
                     <section className="competidor">
