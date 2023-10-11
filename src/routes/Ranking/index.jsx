@@ -64,7 +64,6 @@ const Ranking = () => {
         }
     };
 
-
     useEffect(() => {
         sortDataAscending('pontuacao', "follow")
     }, [follow.length < 1])
@@ -91,9 +90,17 @@ const Ranking = () => {
                     return (
                         <>
                             <section key={item._id} className="itens-ranking">
-                                <p style={{width: "10%", textAlign: "center"}}>{contFollow}</p>
-                                <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
-                                <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
+                                <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
+                                <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
+                                {item.modalidade.match("follow")
+                                    ? (<p style={{ width: "20%", textAlign: "center" }}>
+                                        {
+                                            item.pontuacao
+                                                ? (item.pontuacao.length < 100 ? "0:"+item.pontuacao : item.pontuacao%100 + ":" + item.pontuacao%100)
+                                                : "0:00"
+                                        }
+                                    </p>)
+                                    : (<p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>)}
                             </section>
                         </>
                     )
@@ -107,9 +114,9 @@ const Ranking = () => {
                     contMega++
                     return (
                         <section key={item._id} className="itens-ranking">
-                            <p style={{width: "10%", textAlign: "center"}}>{contMega}</p>
-                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
-                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
+                            <p style={{ width: "10%", textAlign: "center" }}>{contMega}</p>
+                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
+                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                         </section>
                     )
                 })}
@@ -119,12 +126,12 @@ const Ranking = () => {
                 <h2>Mini:</h2>
                 <hr />
                 {mini.map((item) => {
-                    contMini
+                    contMini++
                     return (
                         <section key={item._id} className="itens-ranking">
-                            <p style={{width: "10%", textAlign: "center"}}>{contMini}</p>
-                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
-                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
+                            <p style={{ width: "10%", textAlign: "center" }}>{contMini}</p>
+                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
+                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                         </section>
                     )
                 })}
@@ -137,9 +144,9 @@ const Ranking = () => {
                     contCode++
                     return (
                         <section key={item._id} className="itens-ranking">
-                            <p style={{width: "10%", textAlign: "center"}}>{contCode}</p>
-                            <p style={{width: "70%"}}>{item.nomeCompetidor}</p>
-                            <p style={{width: "20%", textAlign: "center"}}>{item.pontuacao? item.pontuacao: 0}</p>
+                            <p style={{ width: "10%", textAlign: "center" }}>{contCode}</p>
+                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
+                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                         </section>
                     )
                 })}

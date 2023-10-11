@@ -73,12 +73,22 @@
     box-shadow: 0 0 25px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: -125px;
-    width: 150px;
-    height: 150px;
+    margin-top: -45px;
+    width: 70px;
+    height: 70px;
 }
 
 @media (max-width: 450px){
+
+    .robo img{
+        border: 2px solid #0580F2;
+        box-shadow: 0 0 25px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-top: -105px;
+        width: 130px;
+        height: 130px;
+    }
     #card{
         height: 80%;
         width: 100%;
