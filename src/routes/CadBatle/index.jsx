@@ -29,7 +29,7 @@ const CadBatle = () => {
     const { register, handleSubmit } = useForm()
 
     const fim = (item) => {
-        item.comp.pontuacao === 0 ? item.comp.pontuacao = 1 : item.comp.pontuacao += 1
+        !item.comp.pontuacao ? item.comp.pontuacao = 1 : item.comp.pontuacao += 1
         axios.put(`${baseURL}/edit-competidor/${item.comp._id}`, item.comp)
         setVitoria(item)
     }

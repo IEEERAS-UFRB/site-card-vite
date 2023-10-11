@@ -49,7 +49,7 @@ const ListaVencedores = ({ souCad }) => {
                                 <ul key={key._id} className="table" style={{ width: "auto" }}>
                                     <ol style={{ color: "#fff" }}>
                                         <span onClick={() => navigate(`/site-card-vite/${key.comp1._id}`)}> {key.comp1.nomeCompetidor} </span> 
-                                        {modalidade.match("Follow") ? "" : <span onClick={() => navigate(`/site-card-vite/${key.comp2._id}`)}> {key.comp2.nomeCompetidor} </span> }
+                                        {modalidade.match("Follow") ? "" : <span onClick={() => navigate(`/site-card-vite/${key.comp2._id}`)}>VS  {key.comp2.nomeCompetidor} </span> }
                                         {souCad ? " | " + key._id : ""}
                                     </ol>
                                 </ul>

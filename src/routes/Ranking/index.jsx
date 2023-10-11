@@ -13,11 +13,6 @@ const Ranking = () => {
     const [mini, setMini] = useState([])
     const [robocode, setRobocode] = useState([])
 
-    const [data, setData] = useState([]);
-
-    const [ranking, setRanking] = useState([])
-    const [maior, setMaior] = useState([{ pontuacao: 0 }])
-
     useEffect(() => {
         axios.get(`${baseURL}/competidor`).then(res => setCompetidores(res.data))
     }, [])
@@ -92,11 +87,11 @@ const Ranking = () => {
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
                                 <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
-                                {item.modalidade.match("follow")
+                                {item.modalidade.match("Follow")
                                     ? (<p style={{ width: "20%", textAlign: "center" }}>
                                         {
                                             item.pontuacao
-                                                ? (item.pontuacao.length < 100 ? "0:"+item.pontuacao : item.pontuacao%100 + ":" + item.pontuacao%100)
+                                                ? (item.pontuacao < 100 ? "0:"+item.pontuacao : Math.floor(item.pontuacao/100) + ":" + item.pontuacao%100)
                                                 : "0:00"
                                         }
                                     </p>)

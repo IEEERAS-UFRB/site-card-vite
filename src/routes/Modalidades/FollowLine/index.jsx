@@ -26,18 +26,18 @@ const FollowLine = ({ item, comecar }) => {
                             axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
                         } else {
                             if (res.data.tempo.tempo2 === "--") {
-                                if (res.data.tempo.tempo1 < Number(values.tempo)) {
-                                    key.comp1.pontuacao = res.data.tempo.tempo1
+                                if (Number(res.data.tempo.tempo1) < Number(values.tempo)) {
+                                    key.comp1.pontuacao = Number(res.data.tempo.tempo1)
                                 } else {
                                     key.comp1.pontuacao = Number(values.tempo)
                                 }
                                 axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: res.data.tempo.tempo1, tempo2: values.tempo, tempo3: "--" } })
                             } else {
-                                if (res.data.tempo.tempo2 < Number(values.tempo)) {
-                                    key.comp1.pontuacao = res.data.tempo.tempo2
+                                if (Number(res.data.tempo.tempo2) < Number(values.tempo)) {
+                                    key.comp1.pontuacao = Number(res.data.tempo.tempo2)
                                 } else {
-                                    if (res.data.tempo.tempo1 < Number(values.tempo)) {
-                                        key.comp1.pontuacao = res.data.tempo.tempo1
+                                    if (Number(res.data.tempo.tempo1) < Number(values.tempo)) {
+                                        key.comp1.pontuacao = Number(res.data.tempo.tempo1)
                                     } else {
                                         key.comp1.pontuacao = Number(values.tempo)
                                     }
