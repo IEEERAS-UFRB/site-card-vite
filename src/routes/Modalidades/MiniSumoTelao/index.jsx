@@ -22,7 +22,7 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
                 vencedor.map((item) => {
                     return (
                         <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
-                            <section className="min-card" >
+                            <section className="mini-card-telao" >
                                 <section className="header">
                                     {/* <p>{item.comp.ranking}</p> */}
                                     <h5>{vencedor[0] !== undefined ? item.comp.nomeCompetidor : ""}</h5>

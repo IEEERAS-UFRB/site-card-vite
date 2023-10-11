@@ -19,9 +19,56 @@
     background: #000;
 }
 
+.mini-card-telao{
+    animation: ease-in;
+    width: 260px;
+    height: 450px;
+    margin: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    font-family: sans-serif;
+    border: 2px solid #63b4ff;
+    box-shadow: 0 0 15px #63b4ff, inset 0 0 15px #63b4ff;
+}
+
+.mini-card-telao .robo img{
+    width: 100px;
+    margin-top:-60px;
+    height: 100px;
+}
+
+.mini-card-telao .header{
+    font-size: 23pt;
+}
+
+.mini-card-telao .content{
+    font-size: 14pt;
+}
+
 @media (max-width: 450px) {
     #container-sumo {
         width: 50%;
+    }
+
+    .mini-card-telao{
+        height: 500px;
+        width: 300px;
+    }
+
+    .mini-card-telao .content{
+        font-size: 14pt;
+    }
+
+    .mini-card-telao .robo img{
+        margin-top: -70px;
+        width: 120px;
+        height: 120px;
     }
 }
 
@@ -32,16 +79,18 @@
 
     #container-sumo {
         width: 100%;
-        grid-template-columns: 60% 40%;
+        grid-template-rows: 60% 40%;
         align-items: center;
     }
 
-    #container-image-mega-sumo {
-        width: 100px;
-        height: 100px;
+    .mini-card-telao .robo img {
+        width: 80px;
+        height: 80px;
     }
 
-    .mini0card {
+    .mini-card-telao{
         margin: auto;
+        height: 450px;
+        width: 250px;
     }
 }

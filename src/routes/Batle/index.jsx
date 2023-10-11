@@ -18,29 +18,33 @@ const Batle = () => {
             <section className="card-modalidade" >
                 <h2>{modalidades[0]}</h2>
                 <div className="unico">
-                    <img src={imgMega} alt="modalidade mega" style={{ width: "100%" }} />
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[0]}`)}></section>
+                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[0]}`)}>
+                        <img src={imgMega} alt="modalidade mega" style={{ width: "100%" }} />
+                    </section>
                 </div>
             </section>
             <section className="card-modalidade">
                 <h2>{modalidades[2]}</h2>
                 <div className="unico">
-                    <img src={imgMini} alt="modalidade mega" style={{ width: "100%" }} />
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[2]}`)}></section>
+                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[2]}`)}>
+                        <img src={imgMini} alt="modalidade mega" style={{ width: "100%" }} />
+                    </section>
                 </div>
             </section>
             <section className="card-modalidade">
                 <h2>{modalidades[4]}</h2>
                 <div className="unico">
-                    <img src={imgFollow} alt="modalidade mega" style={{ width: "100%" }} />
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[4]}`)}></section>
+                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[4]}`)}>
+                        <img src={imgFollow} alt="modalidade mega" style={{ width: "100%" }} />
+                    </section>
                 </div>
             </section>
             <section className="card-modalidade">
                 <h2>{modalidades[5]}</h2>
                 <div className="unico">
-                    <img src="https://th.bing.com/th/id/R.48e7e22ea51843dcc204431c2eccb993?rik=1T8iMS7ZeIplkQ&riu=http%3a%2f%2ffatvat.co.uk%2fuploaded_images%2frobot-737874.png&ehk=hDf%2ft27FZFwrE2EDn94i1yZbYCtQJneOpXV1Pb%2fbzm0%3d&risl=&pid=ImgRaw&r=0" alt="modalidade mega" style={{ width: "100%" }} />
-                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[5]}`)}></section>
+                    <section onClick={() => navigate(`/site-card-vite/batle/${modalidades[5]}`)}>
+                        <img src="https://th.bing.com/th/id/R.48e7e22ea51843dcc204431c2eccb993?rik=1T8iMS7ZeIplkQ&riu=http%3a%2f%2ffatvat.co.uk%2fuploaded_images%2frobot-737874.png&ehk=hDf%2ft27FZFwrE2EDn94i1yZbYCtQJneOpXV1Pb%2fbzm0%3d&risl=&pid=ImgRaw&r=0" alt="modalidade mega" style={{ width: "100%" }} />
+                    </section>
                 </div>
             </section>
         </div>

@@ -86,17 +86,20 @@ const Ranking = () => {
                         <>
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
-                                <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
+                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%" }}>{item.equipe} </p>
                                 {item.modalidade.match("Follow")
                                     ? (<p style={{ width: "20%", textAlign: "center" }}>
                                         {
                                             item.pontuacao
-                                                ? (item.pontuacao < 100 ? "0:"+item.pontuacao : Math.floor(item.pontuacao/100) + ":" + item.pontuacao%100)
+                                                ? (item.pontuacao < 100 ? "0:" + item.pontuacao : Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100)
                                                 : "0:00"
                                         }
                                     </p>)
                                     : (<p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>)}
                             </section>
+                            <hr style={{ width: "95%", margin: "5px auto" }} />
+
                         </>
                     )
                 })}
@@ -108,11 +111,15 @@ const Ranking = () => {
                 {mega.map((item) => {
                     contMega++
                     return (
-                        <section key={item._id} className="itens-ranking">
-                            <p style={{ width: "10%", textAlign: "center" }}>{contMega}</p>
-                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
-                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
-                        </section>
+                        <>
+                            <section key={item._id} className="itens-ranking">
+                                <p style={{ width: "10%", textAlign: "center" }}>{contMega}</p>
+                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
+                            </section>
+                            <hr style={{ width: "95%", margin: "5px auto" }} />
+                        </>
                     )
                 })}
             </section>
@@ -123,11 +130,16 @@ const Ranking = () => {
                 {mini.map((item) => {
                     contMini++
                     return (
-                        <section key={item._id} className="itens-ranking">
-                            <p style={{ width: "10%", textAlign: "center" }}>{contMini}</p>
-                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
-                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
-                        </section>
+                        <>
+                            <section key={item._id} className="itens-ranking">
+                                <p style={{ width: "10%", textAlign: "center" }}>{contMini}</p>
+                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
+                            </section>
+                            <hr style={{ width: "95%", margin: "5px auto" }} />
+                        </>
+
                     )
                 })}
             </section>
@@ -138,11 +150,15 @@ const Ranking = () => {
                 {robocode.map((item) => {
                     contCode++
                     return (
-                        <section key={item._id} className="itens-ranking">
-                            <p style={{ width: "10%", textAlign: "center" }}>{contCode}</p>
-                            <p style={{ width: "70%" }}>{item.nomeCompetidor}</p>
-                            <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
-                        </section>
+                        <>
+                            <section key={item._id} className="itens-ranking">
+                                <p style={{ width: "10%", textAlign: "center" }}>{contCode}</p>
+                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
+                            </section>
+                            <hr style={{ width: "95%", margin: "5px auto" }} />
+                        </>
                     )
                 })}
             </section>
