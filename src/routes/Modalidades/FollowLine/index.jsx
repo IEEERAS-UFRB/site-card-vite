@@ -21,6 +21,7 @@ const FollowLine = ({ item, comecar }) => {
         voltas.map((key) => {
             if (key.tempo) {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
+                    console.log(res.data)
                     if (res.data.comp1._id === item._id || res.data.comp1._id === item.comp1._id) {
                         if (res.data.tempo.tempo1 === "--") {
                             key.comp1.pontuacao = Number(res.data.tempo.tempo1)
@@ -47,10 +48,10 @@ const FollowLine = ({ item, comecar }) => {
                             }
 
                         }
+                        console.log(key.comp1)
+    
+                        axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
                     }
-                    console.lo("chamou")
-
-                    axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
                 })
             } else {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {

@@ -32,9 +32,23 @@ const Cadastrar = () => {
 
                 <section className="item-form">
                     <label htmlFor="">
+                        Instagram
+                    </label>
+                    <input required type="text" name="instagram" placeholder="instagram" {...register("instagram")} />
+                </section>
+
+                <section className="item-form">
+                    <label htmlFor="">
                         Equipe
                     </label>
                     <input required type="text" name="equipe" placeholder="Equipe" {...register("equipe")} />
+                </section>
+
+                <section className="item-form">
+                    <label htmlFor="">
+                        Link Equipe
+                    </label>
+                    <input required type="text" name="linkGifEquipe" placeholder="linkGifEquipe" {...register("linkGifEquipe")} />
                 </section>
 
                 <section className="item-form">

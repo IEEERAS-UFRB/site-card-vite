@@ -78,6 +78,16 @@
     height: 70px;
 }
 
+#table-home{
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+#table-home h2{
+    font-size: 25pt;
+}
+
 @media (max-width: 450px){
 
     .robo img{

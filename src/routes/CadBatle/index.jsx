@@ -65,7 +65,7 @@ const CadBatle = () => {
     const fight = () => {
         if (batalha.length === 1) {
             batalha.map((item) => {
-                axios.post(`${baseURL}/volta`, { comp1: batalha[0] })
+                axios.post(`${baseURL}/volta`, { comp1: batalha[0], tempo:{tempo1:"--", tempo2:"--", tempo3:"--"} })
                 console.log("Corrida do robô: " + item.nomeRobo)
             })
         } else if (batalha.length === 2) {
@@ -90,6 +90,9 @@ const CadBatle = () => {
     const removerCompetidores = () => {
         setBatalha([])
         setReboot(false)
+    }
+
+    const novaPartida = () =>{
 
         vitoria.acabou = true
 
@@ -102,7 +105,6 @@ const CadBatle = () => {
         }
 
         navigate(`/site-card-vite/batle/${modalidade}/cadastrar`)
-
     }
 
     const newVolta = () => {
@@ -142,6 +144,7 @@ const CadBatle = () => {
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
                 <button onClick={() => fight()} >Começar</button>
                 {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => removerCompetidores()} >reiniciar</button>}
+                {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => novaPartida()} >nova Partida</button>}
             </section>
 
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>

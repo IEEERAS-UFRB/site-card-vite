@@ -32,9 +32,10 @@ const Ranking = () => {
         if (modalidade.match("follow")) {
             const sortedData = [...follow];
             sortedData.sort((a, b) => {
-                return b[field] - a[field];
+                return a[field] - b[field];
             });
             setFollow(sortedData);
+            ordenarRanking(follow)
         } else if (modalidade.match("mega")) {
             const sortedData = [...mega];
             sortedData.sort((a, b) => {
@@ -42,6 +43,7 @@ const Ranking = () => {
             });
 
             setMega(sortedData);
+            ordenarRanking(mega)
         } else if (modalidade.match("mini")) {
             const sortedData = [...mini];
             sortedData.sort((a, b) => {
@@ -49,6 +51,7 @@ const Ranking = () => {
             });
 
             setMini(sortedData);
+            ordenarRanking(mini)
         } else if (modalidade.match("robocode")) {
             const sortedData = [...robocode];
             sortedData.sort((a, b) => {
@@ -56,8 +59,19 @@ const Ranking = () => {
             });
 
             setRobocode(sortedData);
+            ordenarRanking(robocode)
         }
     };
+
+    const ordenarRanking = (item) =>{
+        let cont = item.length + 1 
+        item.map((key) =>{
+            cont --
+            key.ranking = cont.toString()
+            console.log(key.nomeCompetidor)
+            axios.put(`${baseURL}/edit-competidor/${key._id}`, key).then((res) => console.log(res.data))
+        })
+    }
 
     useEffect(() => {
         sortDataAscending('pontuacao', "follow")
@@ -81,7 +95,6 @@ const Ranking = () => {
                 <hr />
                 {follow.map((item) => {
                     contFollow++
-                    //handleSort("pontuacao")
                     return (
                         <>
                             <section key={item._id} className="itens-ranking">

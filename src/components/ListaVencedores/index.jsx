@@ -66,9 +66,9 @@ const ListaVencedores = ({ souCad }) => {
                                     return (
                                         <ul className="table" style={{ width: "auto" }}>
                                             <ol style={{ color: "#fff", display: "flex", justifyContent: "space-between", width: "100%" }}>
-                                                <p> {key.tempo.tempo1 !== "--" ? key.tempo.tempo1 : "--"} </p>
-                                                <p> {key.tempo.tempo2 !== "--" ? key.tempo.tempo2 : "--"}</p>
-                                                <p> {key.tempo.tempo3 !== "--" ? key.tempo.tempo3 : "--"}</p>
+                                                <p> {key.tempo.tempo1 !== "--" ? key.tempo.tempo1 < 100 ? "0:" + key.tempo.tempo1 : Math.floor(key.tempo.tempo1 / 100) + ":" + key.tempo.tempo1 % 100 : "--"} </p>
+                                                <p> {key.tempo.tempo2 !== "--" ? key.tempo.tempo2 < 100 ? "0:" + key.tempo.tempo2 : Math.floor(key.tempo.tempo2 / 100) + ":" + key.tempo.tempo2 % 100 : "--"}</p>
+                                                <p> {key.tempo.tempo3 !== "--" ? key.tempo.tempo3 < 100 ? "0:" + key.tempo.tempo3 : Math.floor(key.tempo.tempo3 / 100) + ":" + key.tempo.tempo3 % 100 : "--"}</p>
                                             </ol>
                                         </ul>
                                     )
