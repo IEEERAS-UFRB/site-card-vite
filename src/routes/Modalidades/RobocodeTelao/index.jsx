@@ -2,20 +2,33 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube"
 
 import "./style.css"
+import axios from "axios";
+import { baseURL } from "../../../assets/axios/config";
 
 const RobocodeTelao = ({ competidores, vencedor }) => {
 
     const [acabou, setAcabou] = useState(false)
 
+    const [venc, setVenc] = useState([])
+    const [comp, setComp] = useState([])
+
     useEffect(() => {
-        if (vencedor[0] !== undefined) {
-            vencedor.map((item) => {
-                if (item.acabou) {
-                    setAcabou(item.acabou)
-                }
-            })
+        axios.get(`${baseURL}/round-code`).then(res => setComp(res.data))
+        axios.get(`${baseURL}/vitoria-code`).then(res => setVenc(res.data))
+    }, [])
+
+    useEffect(() => {
+
+        if (comp.length > venc.length) {
+            setAcabou(false)
         }
-    }, [vencedor])
+        else {
+            setAcabou(true)
+        }
+
+    }, [venc.length > 0 && comp.length > 0])
+
+    let cont = 0
 
     return (
         <section className="container-robocode">
@@ -26,7 +39,7 @@ const RobocodeTelao = ({ competidores, vencedor }) => {
             )}
 
             <div className="container-cards-robocode">
-                {(!acabou) ? (
+                {(acabou) ? (
                     vencedor.map((item) => {
                         return (
                             <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
@@ -59,29 +72,34 @@ const RobocodeTelao = ({ competidores, vencedor }) => {
                     })
                 ) : (
                     competidores.map((item) => {
+                        cont++
                         return (
-                            <section id="container-sumo" key={item._id}>
-                                <section className="min-card" >
-                                    <section className="header">
-                                        <p>{item.ranking}</p>
-                                        <h5>{item.nomeCompetidor}</h5>
-                                    </section>
+                            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <section id="container-sumo" key={item._id}>
+                                    <section className="min-card" >
+                                        <section className="header">
+                                            <p>{item.ranking}</p>
+                                            <h5>{item.nomeCompetidor}</h5>
+                                        </section>
 
-                                    <section className="competidor">
-                                        <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
-                                    </section>
-                                    <section className="robo">
-                                        <img src={item.linkRobo} />
-                                    </section>
-                                    <section className="body">
-                                        <section className="content">
-                                            <p><b>Equipe:</b> <span>{item.equipe}</span></p>
-                                            <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
-                                            <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
+                                        <section className="competidor">
+                                            <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                                        </section>
+                                        <section className="robo">
+                                            <img src={item.linkRobo} />
+                                        </section>
+                                        <section className="body">
+                                            <section className="content">
+                                                <p><b>Equipe:</b> <span>{item.equipe}</span></p>
+                                                <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
+                                                <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
+                                            </section>
                                         </section>
                                     </section>
                                 </section>
-                            </section>
+                                {cont <= 1 ? "VS" : ""}
+
+                            </div>
                         )
                     })
                 )}
