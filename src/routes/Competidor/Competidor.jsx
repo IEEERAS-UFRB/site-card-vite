@@ -29,7 +29,7 @@ const Competidor = () => {
                         <hr />
                         <p><span>Ranking: </span>{item.ranking}</p>
                         <hr />
-                        <p><span>{item.modalidade.match("Follow") ? "Melhor Tempo: " : "Pontuação"}</span>{item.modalidade.match("Follow") ? Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100 + "s" : item.pontuacao}</p>
+                        <p><span>{item.modalidade == "Follow Line" ? "Melhor Tempo: " : "Pontuação"}</span>{item.modalidade == "Follow Line" ? Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100 + "s" : item.pontuacao}</p>
                         <hr />
                         <p><span>Modalidade: </span>{item.modalidade}</p>
                     </section>

@@ -35,7 +35,7 @@ const Ranking = () => {
                 return a[field] - b[field];
             });
             setFollow(sortedData);
-            ordenarRanking(follow)
+            ordenarRanking(follow, true)
         } else if (modalidade.match("mega")) {
             const sortedData = [...mega];
             sortedData.sort((a, b) => {
@@ -43,7 +43,7 @@ const Ranking = () => {
             });
 
             setMega(sortedData);
-            ordenarRanking(mega)
+            ordenarRanking(mega, false)
         } else if (modalidade.match("mini")) {
             const sortedData = [...mini];
             sortedData.sort((a, b) => {
@@ -51,7 +51,7 @@ const Ranking = () => {
             });
 
             setMini(sortedData);
-            ordenarRanking(mini)
+            ordenarRanking(mini, false)
         } else if (modalidade.match("robocode")) {
             const sortedData = [...robocode];
             sortedData.sort((a, b) => {
@@ -59,18 +59,28 @@ const Ranking = () => {
             });
 
             setRobocode(sortedData);
-            ordenarRanking(robocode)
+            ordenarRanking(robocode, false)
         }
     };
 
-    const ordenarRanking = (item) =>{
-        let cont = item.length + 1 
-        item.map((key) =>{
-            cont --
-            key.ranking = cont.toString()
-            console.log(key.nomeCompetidor)
-            axios.put(`${baseURL}/edit-competidor/${key._id}`, key).then((res) => console.log(res.data))
-        })
+    const ordenarRanking = (item, mod) =>{
+        if(mod){
+            let cont = item.length + 1 
+            item.map((key) =>{
+                cont --
+                key.ranking = cont.toString()
+                console.log(key.ranking)
+                axios.put(`${baseURL}/edit-competidor/${key._id}`, key).then((res) => console.log(res.data))
+            })
+        }else{
+            let cont = 0
+            item.map((key) =>{
+                cont ++
+                key.ranking = cont.toString()
+                console.log(key.ranking)
+                axios.put(`${baseURL}/edit-competidor/${key._id}`, key).then((res) => console.log(res.data))
+            })
+        }
     }
 
     useEffect(() => {

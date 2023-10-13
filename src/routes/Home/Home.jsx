@@ -38,7 +38,6 @@ const Home = () => {
                 return a[field] - b[field];
             });
             setFollow(sortedData);
-            ordenarRanking(follow)
         } else if (modalidade.match("mega")) {
             const sortedData = [...mega];
             sortedData.sort((a, b) => {
@@ -46,7 +45,6 @@ const Home = () => {
             });
 
             setMega(sortedData);
-            ordenarRanking(mega)
         } else if (modalidade.match("mini")) {
             const sortedData = [...mini];
             sortedData.sort((a, b) => {
@@ -54,7 +52,6 @@ const Home = () => {
             });
 
             setMini(sortedData);
-            ordenarRanking(mini)
         } else if (modalidade.match("robocode")) {
             const sortedData = [...robocode];
             sortedData.sort((a, b) => {
@@ -62,32 +59,21 @@ const Home = () => {
             });
 
             setRobocode(sortedData);
-            ordenarRanking(robocode)
         }
     };
 
-    const ordenarRanking = (item) => {
-        let cont = item.length + 1
-        item.map((key) => {
-            cont--
-            key.ranking = cont.toString()
-            console.log(key.nomeCompetidor)
-            axios.put(`${baseURL}/edit-competidor/${key._id}`, key).then((res) => console.log(res.data))
-        })
-    }
-
     useEffect(() => {
         sortDataAscending('pontuacao', "follow")
-    }, [follow.length < 3])
+    }, [follow.length < 1])
     useEffect(() => {
         sortDataAscending('pontuacao', "mega")
-    }, [mega.length < 3])
+    }, [mega.length < 1])
     useEffect(() => {
         sortDataAscending('pontuacao', "mini")
-    }, [mini.length < 3])
+    }, [mini.length < 1])
     useEffect(() => {
         sortDataAscending('pontuacao', "robocode")
-    }, [robocode.length < 3])
+    }, [robocode.length < 1])
 
     let contFollow = 0, contMega = 0, contMini = 0, contCode = 0
 
@@ -100,9 +86,9 @@ const Home = () => {
                     contFollow++
                     return (
                         <>
-                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                            <section key={item._id} id="card" className="cardFollow" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
                                 <section className="header">
-                                    <p>{item.ranking}</p>
+                                    <p>{contFollow}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
 
@@ -134,7 +120,7 @@ const Home = () => {
                         <>
                             <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
                                 <section className="header">
-                                    <p>{item.ranking}</p>
+                                    <p>{contMega}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
 
@@ -166,7 +152,7 @@ const Home = () => {
                         <>
                             <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
                                 <section className="header">
-                                    <p>{item.ranking}</p>
+                                    <p>{contMini}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
 
@@ -199,7 +185,7 @@ const Home = () => {
                         <>
                             <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
                                 <section className="header">
-                                    <p>{item.ranking}</p>
+                                    <p>{contCode}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
 
