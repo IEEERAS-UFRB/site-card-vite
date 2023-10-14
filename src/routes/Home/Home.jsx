@@ -35,7 +35,9 @@ const Home = () => {
         if (modalidade.match("follow")) {
             const sortedData = [...follow];
             sortedData.sort((a, b) => {
-                return a[field] - b[field];
+                if (a[field] !== 0 && b[field] !== 0) {
+                    return a[field] - b[field];
+                }
             });
             setFollow(sortedData);
         } else if (modalidade.match("mega")) {
@@ -79,39 +81,8 @@ const Home = () => {
 
     return (
         <section id="table-home">
-            <h2>Follow:</h2>
-            <hr />
-            <section id="continer-cards">
-                {follow.map((item) => {
-                    contFollow++
-                    return (
-                        <>
-                            <section key={item._id} id="card" className="cardFollow" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
-                                <section className="header">
-                                    <p>{contFollow}</p>
-                                    <h5>{item.nomeCompetidor}</h5>
-                                </section>
 
-                                <section className="competidor">
-                                    <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
-                                </section>
-                                <section className="robo">
-                                    <img src={item.linkRobo} />
-                                </section>
-                                <section className="body">
-                                    <section className="content">
-                                        <p><b>Equipe:</b> <span>{item.equipe}</span></p>
-                                        <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
-                                        <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
-                                    </section>
-                                </section>
-                            </section>
-                        </>
-                    )
-                })}
-            </section>
-            <br />
-            <h2>Mega:</h2>
+            <h2>Mega Sumô:</h2>
             <hr />
             <section id="continer-cards">
                 {mega.map((item) => {
@@ -143,7 +114,7 @@ const Home = () => {
                 })}
             </section>
             <br />
-            <h2>Mini:</h2>
+            <h2>Mini Sumô:</h2>
             <hr />
             <section id="continer-cards">
                 {mini.map((item) => {
@@ -172,6 +143,38 @@ const Home = () => {
                             </section>
                         </>
 
+                    )
+                })}
+            </section>
+            <br />
+            <h2>Follow:</h2>
+            <hr />
+            <section id="continer-cards">
+                {follow.map((item) => {
+                    contFollow++
+                    return (
+                        <>
+                            <section key={item._id} id="card" className="cardFollow" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                                <section className="header">
+                                    <p>{contFollow}</p>
+                                    <h5>{item.nomeCompetidor}</h5>
+                                </section>
+
+                                <section className="competidor">
+                                    <div style={{ backgroundImage: `url(${item.linkGif})`, backgroundSize: "contain", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} > </div>
+                                </section>
+                                <section className="robo">
+                                    <img src={item.linkRobo} />
+                                </section>
+                                <section className="body">
+                                    <section className="content">
+                                        <p><b>Equipe:</b> <span>{item.equipe}</span></p>
+                                        <p><b>Modalidade:</b> <span>{item.modalidade}</span></p>
+                                        <p><b>Instituição:</b> <span>{item.instituicao}</span></p>
+                                    </section>
+                                </section>
+                            </section>
+                        </>
                     )
                 })}
             </section>

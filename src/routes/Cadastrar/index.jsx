@@ -15,7 +15,8 @@ const Cadastrar = () => {
     const onSubmit = async (values) => {
         values.ranking = 0
         values.pontuacao = 0
-        await blogFetch.post("/cad-competidor", values).then((res) => setId(res.data._id))
+        values.instagram = "https://www.instagram.com/" + values.instagram
+        await blogFetch.post("/cad-competidor", values).then((res) => {setId(res.data._id)})
         // values.linkQR = `http://localhost:4000/site-card-vite/${id}`
     }
 

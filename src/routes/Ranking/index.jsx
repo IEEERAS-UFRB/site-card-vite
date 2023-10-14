@@ -32,7 +32,9 @@ const Ranking = () => {
         if (modalidade.match("follow")) {
             const sortedData = [...follow];
             sortedData.sort((a, b) => {
-                return a[field] - b[field];
+                if(a[field] !== 0 && b[field] !== 0){
+                    return a[field] - b[field];
+                }
             });
             setFollow(sortedData);
             ordenarRanking(follow, true)
