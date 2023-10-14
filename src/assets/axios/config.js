@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseURL = "http://localhost:4000"
+export const baseURL = "https://gestum.serveo.net"
 
 const blogFetch = axios.create({
     baseURL: baseURL,
