@@ -56,7 +56,13 @@ const Cadastrar = () => {
                     <label htmlFor="">
                         Modalidade
                     </label>
-                    <input required type="text" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
+                    <input required list="modalidades" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
+                    <datalist id="modalidades">
+                        <option value="Follow Line"></option>
+                        <option value="Mega Sumô"></option>
+                        <option value="Mini Sumô"></option>
+                        <option value="Robocode"></option>
+                    </datalist>
                 </section>
 
                 <section className="item-form">
