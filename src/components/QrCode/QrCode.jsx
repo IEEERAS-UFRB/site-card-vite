@@ -32,7 +32,7 @@ const QrCode = ({id}) => {
         <>
             <div id="QR">
                 <QRCode value={newLink} id="qr-code" />
-                <a href={qrCodeLink} download={`qrcode.png`} >baixar qr</a>
+                {/* <a href={qrCodeLink} download={`qrcode.png`} >baixar qr</a> */}
             </div>
         </>
     )

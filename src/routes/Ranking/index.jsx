@@ -87,8 +87,8 @@ const Ranking = () => {
                         <>
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
-                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
-                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
                                 {item.modalidade.match("Follow")
                                     ? (<p style={{ width: "20%", textAlign: "center" }}>
                                         {
@@ -115,8 +115,8 @@ const Ranking = () => {
                         <>
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contMega}</p>
-                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
-                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
                                 <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                             </section>
                             <hr style={{ width: "95%", margin: "5px auto" }} />
@@ -134,8 +134,8 @@ const Ranking = () => {
                         <>
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contMini}</p>
-                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
-                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
                                 <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                             </section>
                             <hr style={{ width: "95%", margin: "5px auto" }} />
@@ -154,8 +154,8 @@ const Ranking = () => {
                         <>
                             <section key={item._id} className="itens-ranking">
                                 <p style={{ width: "10%", textAlign: "center" }}>{contCode}</p>
-                                <p style={{ width: "35%" }}>{item.nomeRobo} </p>
-                                <p style={{ width: "35%" }}>{item.equipe} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
                                 <p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>
                             </section>
                             <hr style={{ width: "95%", margin: "5px auto" }} />
