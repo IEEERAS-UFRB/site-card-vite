@@ -67,9 +67,9 @@ const Competidor = () => {
             <hr />
 
             <section className="qrcodes">
-                <section id="competidor" onClick={() => irPara(`/https://gabriel-marcosilva.github.io/site-card-vite/${id}`)}>
+                <section id="competidor" onClick={() => irPara(`/ https://ieeeras-ufrb.github.io/site-card-vite/${id}`)}>
                     <h3 style={{ fontFamily: "sans-serif", fontWeight: "normal" }}> <span style={{ fontWeight: "bold" }}>meu card:</span></h3>
-                    <QRCode value={`https://gabriel-marcosilva.github.io/site-card-vite/${id}`} id="qr-code-comp" />
+                    <QRCode value={`https://ieeeras-ufrb.github.io/site-card-vite/${id}`} id="qr-code-comp" />
                 </section>
 
                 <section id="competidor" onClick={() => irPara(`/${item.instagram}`)}>
