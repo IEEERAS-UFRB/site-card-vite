@@ -16,23 +16,24 @@ import Modalidade from './routes/Modalidade'
 import CadBatle from './routes/CadBatle'
 import Editbatle from './routes/EditBatle'
 import Ranking from './routes/Ranking'
+import RankingCad from './routes/RankingCad'
 
 const router = createBrowserRouter([
   {
     path: "/site-card-vite/",
     element: <App />,
-    children:[
+    children: [
       {
         path: "/site-card-vite/",
-        element: <Home/>
+        element: <Home />
       },
       {
         path: "/site-card-vite/:id",
-        element: <Competidor/>
+        element: <Competidor />
       },
       {
         path: "/site-card-vite/cadastrar",
-        element: <Cadastrar/>
+        element: <Cadastrar />
       },
       {
         path: "/site-card-vite/remover",
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
         element: <Editar />
       },
       {
-        path:"/site-card-vite/editar/:id",
+        path: "/site-card-vite/editar/:id",
         element: <EditCompetidor />
       },
       {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/site-card-vite/ranking",
         element: <Ranking />
+      },
+      {
+        path: "/site-card-vite/ranking/cadastrar",
+        element: <RankingCad />
       }
     ]
   }
