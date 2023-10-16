@@ -15,7 +15,8 @@ const Cadastrar = () => {
     const onSubmit = async (values) => {
         values.ranking = 0
         values.pontuacao = 0
-        await blogFetch.post("/cad-competidor", values).then((res) => setId(res.data._id))
+        values.instagram = "https://www.instagram.com/" + values.instagram
+        await blogFetch.post("/cad-competidor", values).then((res) => {setId(res.data._id)})
         // values.linkQR = `http://localhost:4000/site-card-vite/${id}`
     }
 
@@ -55,7 +56,13 @@ const Cadastrar = () => {
                     <label htmlFor="">
                         Modalidade
                     </label>
-                    <input required type="text" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
+                    <input required list="modalidades" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
+                    <datalist id="modalidades">
+                        <option value="Follow Line">Follow Line</option>
+                        <option value="Mega Sumô">Mega Sumô</option>
+                        <option value="Mini Sumô">Mini Sumô</option>
+                        <option value="Robocode">Robocode</option>
+                    </datalist>
                 </section>
 
                 <section className="item-form">

@@ -24,6 +24,8 @@ const CadBatle = () => {
 
     const [vitoria, setVitoria] = useState([])
 
+    const [partida, setPartida] = useState("")
+
     const navigate = useNavigate()
 
     const { register, handleSubmit } = useForm()
@@ -40,9 +42,22 @@ const CadBatle = () => {
 
     const escolherCompetidores = (item) => {
 
-        if (modalidade != "Follow Line" & batalha.length < 2) {
-            if (batalha[0]) {
-                if (batalha[0]._id !== item._id) {
+        if (item.comp1 && item.comp2) {
+            setBatalha([item.comp1, item.comp2])
+        }
+        else {
+            if (modalidade != "Follow Line" & batalha.length < 2) {
+                if (batalha[0]) {
+                    if (batalha[0]._id !== item._id) {
+                        const newBatle = [
+                            ...batalha,
+                            item
+                        ]
+                        setBatalha(newBatle)
+
+                    }
+                }
+                if (batalha.length === 0) {
                     const newBatle = [
                         ...batalha,
                         item
@@ -50,41 +65,38 @@ const CadBatle = () => {
                     setBatalha(newBatle)
                 }
             }
-            if (batalha.length === 0) {
-                const newBatle = [
-                    ...batalha,
-                    item
-                ]
-                setBatalha(newBatle)
+
+            else {
+                setBatalha([item])
             }
-        } else {
-            setBatalha([item])
         }
+
     }
 
     const fight = () => {
         if (batalha.length === 1) {
             batalha.map((item) => {
-                axios.post(`${baseURL}/volta`, { comp1: batalha[0], tempo:{tempo1:"--", tempo2:"--", tempo3:"--"} })
-                console.log("Corrida do robô: " + item.nomeRobo)
+                axios.post(`${baseURL}/volta`, { comp1: batalha[0], tempo: { tempo1: "--", tempo2: "--", tempo3: "--" } }).then(() => {
+                    console.log("Corrida do robô: " + item.nomeRobo)
+                    setComecar(true)
+                })
             })
         } else if (batalha.length === 2) {
 
             if (modalidade.match("Mega")) {
-                axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] })
+                axios.post(`${baseURL}/round`, { comp1: batalha[0], comp2: batalha[1] }).then(() => setComecar(true))
             }
 
             else if (modalidade.match("Mini")) {
-                axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] })
+                axios.post(`${baseURL}/round-mini`, { comp1: batalha[0], comp2: batalha[1] }).then(() => setComecar(true))
             }
 
             else if (modalidade.match("Robocode")) {
-                axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] })
+                axios.post(`${baseURL}/round-code`, { comp1: batalha[0], comp2: batalha[1] }).then(() => setComecar(true))
             }
 
             console.log("batalha entre: " + batalha[0].nomeRobo + " VS " + batalha[1].nomeRobo)
         }
-        setComecar(true)
     }
 
     const removerCompetidores = () => {
@@ -92,7 +104,7 @@ const CadBatle = () => {
         setReboot(false)
     }
 
-    const novaPartida = () =>{
+    const novaPartida = () => {
 
         vitoria.acabou = true
 
@@ -118,10 +130,18 @@ const CadBatle = () => {
         })
     }
 
-    const onSubmit = async (values) => {
-        if(modalidade.match("Follow")){
-            axios.get(`${baseURL}/volta/${values.idPartida}`).then((res) => escolherCompetidores(res.data))
+    const onSubmit = async () => {
+        if (modalidade.match("Follow")) {
+            axios.get(`${baseURL}/volta/${partida}`).then((res) => escolherCompetidores(res.data)).then(() => setComecar(true))
+        } else if (modalidade.match("Mega")) {
+            axios.get(`${baseURL}/round/${partida}`).then((res) => escolherCompetidores(res.data)).then(() => setComecar(true))
+        } else if (modalidade.match("Mini")) {
+            axios.get(`${baseURL}/round-mini/${partida}`).then((res) => escolherCompetidores(res.data)).then(() => setComecar(true))
         }
+    }
+
+    const idPartida = (item) => {
+        setPartida(item)
     }
 
     return (
@@ -142,15 +162,15 @@ const CadBatle = () => {
             </section>
 
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
-                <button onClick={() => fight()} >Começar</button>
-                {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => removerCompetidores()} >reiniciar</button>}
+                <button onClick={() => fight()} >Cadastrar</button>
+                {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Outro Corredor</button> : <button onClick={() => removerCompetidores()} >reiniciar</button>}
                 {modalidade === "Follow Line" ? <button onClick={() => newVolta()} >Proxima Volta</button> : <button onClick={() => novaPartida()} >nova Partida</button>}
             </section>
 
             <section style={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "space-evenly", margin: "20px auto 0" }}>
                 <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="recPartida" >
                     Recuperar partida
-                    <input type="text" name="idPartida" placeholder="id partida"  {...register("idPartida")} />
+                    <input type="text" name="idPartida" value={partida} placeholder="id partida" {...register("idPartida")} />
                     <button>salvar</button>
                 </form>
             </section>
@@ -184,7 +204,7 @@ const CadBatle = () => {
                 })}
             </section>
 
-            <ListaVencedores souCad={true} />
+            <ListaVencedores souCad={true} idPartida={idPartida} />
         </>
     )
 }

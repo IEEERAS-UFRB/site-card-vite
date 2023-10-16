@@ -10,6 +10,7 @@
 
 @media (max-width: 450px){
     .arena-espec{
-        height: 100vh;
+        height: auto;
+        flex-direction: column;
     }
 }

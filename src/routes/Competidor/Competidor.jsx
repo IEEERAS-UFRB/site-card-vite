@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseURL } from "../../assets/axios/config";
 
 import "./style.css"
@@ -12,15 +12,21 @@ const Competidor = () => {
 
     const [item, setItem] = useState({})
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         axios.get(`${baseURL}/competidor/${id}`).then((res) => {
             setItem(res.data)
         })
     }, [])
 
+    const irPara = (item) =>{
+        navigate(`${item}`)
+    }
+
     return (
         <div className="container-card container-card-comp">
-            <section style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <section style={{ display: "flex", flexDirection: "column", alignItems: "center", width:"100%" }}>
                 <h3>{item.nomeCompetidor}</h3>
                 <section id="competidor" style={{ width: "50vh" }}>
                     <img src={item.linkGif} alt="" />
@@ -43,7 +49,6 @@ const Competidor = () => {
                 <section>
                     <h3 style={{ fontFamily: "sans-serif", fontWeight: "normal" }}> <span style={{ fontWeight: "bold" }}>Equipe:</span>  {item.equipe}</h3>
                     {item.linkGifEquipe ? <img src={item.linkGifEquipe} /> : ""}
-                    {item.linkRobo ? <img src={item.linkRobo} /> : ""}
                 </section>
 
                 <section>
@@ -62,12 +67,12 @@ const Competidor = () => {
             <hr />
 
             <section className="qrcodes">
-                <section id="competidor">
+                <section id="competidor" onClick={() => irPara(`/https://gabriel-marcosilva.github.io/site-card-vite/${id}`)}>
                     <h3 style={{ fontFamily: "sans-serif", fontWeight: "normal" }}> <span style={{ fontWeight: "bold" }}>meu card:</span></h3>
-                    <QRCode value={`${baseURL}/${id}`} id="qr-code-comp" />
+                    <QRCode value={`https://gabriel-marcosilva.github.io/site-card-vite/${id}`} id="qr-code-comp" />
                 </section>
 
-                <section id="competidor">
+                <section id="competidor" onClick={() => irPara(`/${item.instagram}`)}>
                     <h3 style={{ fontFamily: "sans-serif", fontWeight: "normal" }}> <span style={{ fontWeight: "bold" }}>Instagram:</span>  </h3>
                     <QRCode value={`${item.instagram}`} id="qr-code-comp" />
                 </section>
