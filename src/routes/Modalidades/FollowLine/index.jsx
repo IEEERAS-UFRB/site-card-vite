@@ -13,15 +13,22 @@ const FollowLine = ({ item, comecar }) => {
     const [voltas, setVoltas] = useState([])
 
     useEffect(() => {
-        axios.get(`${baseURL}/volta`).then((res) => setVoltas(res.data))
+        verifica()
     }, [comecar])
+    
+    const verifica = () =>{
+        axios.get(`${baseURL}/volta`).then((res) => setVoltas(res.data)).
+            then(res => console.log(res)).
+            catch(err => console.log(err))
+    }
 
     const onSubmit = async (values) => {
 
-        voltas.map((key) => {
+        verifica()
+
+        voltas.filter((key) => {
             if (key.tempo) {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
-                    console.log(res.data)
                     if (res.data.comp1._id === item._id || res.data.comp1._id === item.comp1._id) {
                         if (res.data.tempo.tempo1 === "--") {
                             key.comp1.pontuacao = Number(res.data.tempo.tempo1)
@@ -48,15 +55,15 @@ const FollowLine = ({ item, comecar }) => {
                             }
 
                         }
-                        console.log(key.comp1)
-    
-                        axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data))
+                        axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data)).then(() => location.reload())
                     }
                 })
             } else {
                 axios.get(`${baseURL}/volta/${key._id}`).then(res => {
                     if (res.data.comp1._id === item._id || res.data.comp1._id === item.comp1._id) {
                         axios.put(`${baseURL}/volta/${key._id}`, { comp1: key.comp1, tempo: { tempo1: values.tempo, tempo2: "--", tempo3: "--" } })
+                        key.comp1.pontuacao = Number(values.tempo)
+                        axios.put(`${baseURL}/edit-competidor/${key.comp1._id}`, key.comp1).then(res => console.log(res.data)).then(() => location.reload())
                     }
                 })
 
@@ -72,10 +79,10 @@ const FollowLine = ({ item, comecar }) => {
             <section className="pista">
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
 
-                <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
+               {comecar ? ( <form onSubmit={handleSubmit(async (data) => await onSubmit(data))} id="ranking" >
                     <input type="text" name="tempo" placeholder="tempo percorrido"  {...register("tempo")} />
                     <button>salvar</button>
-                </form>
+                </form>) : ""}
             </section>
 
             <section id="info-follow">

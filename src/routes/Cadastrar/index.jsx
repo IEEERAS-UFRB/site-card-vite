@@ -58,10 +58,10 @@ const Cadastrar = () => {
                     </label>
                     <input required list="modalidades" name="modalidade" placeholder="Modalidade" {...register("modalidade")} />
                     <datalist id="modalidades">
-                        <option value="Follow Line"></option>
-                        <option value="Mega Sumô"></option>
-                        <option value="Mini Sumô"></option>
-                        <option value="Robocode"></option>
+                        <option value="Follow Line">Follow Line</option>
+                        <option value="Mega Sumô">Mega Sumô</option>
+                        <option value="Mini Sumô">Mini Sumô</option>
+                        <option value="Robocode">Robocode</option>
                     </datalist>
                 </section>
 

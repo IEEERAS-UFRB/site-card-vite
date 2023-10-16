@@ -4,7 +4,7 @@ import axios from "axios"
 import { baseURL } from "../../assets/axios/config"
 import "./style.css"
 
-const ListaVencedores = ({ souCad }) => {
+const ListaVencedores = ({ souCad, idPartida }) => {
 
     const { modalidade } = useParams()
 
@@ -35,6 +35,10 @@ const ListaVencedores = ({ souCad }) => {
         }
     }, [vitoria.length === 0])
 
+    const Partida = (item) =>{
+        idPartida(item)
+    }
+
     return (
         <>
             <h1 style={{ margin: "20px auto", textAlign: "center", color: "#fff", textDecoration: "underline" }}>
@@ -47,7 +51,7 @@ const ListaVencedores = ({ souCad }) => {
                         if (key.comp1) {
                             return (
                                 <ul key={key._id} className="table" style={{ width: "auto" }}>
-                                    <ol style={{ color: "#fff" }}>
+                                    <ol style={{ color: "#fff" }} onClick={() => Partida(key._id)}>
                                         <span onClick={() => navigate(`/site-card-vite/${key.comp1._id}`)}> {key.comp1.nomeCompetidor} </span> 
                                         {modalidade.match("Follow") ? "" : <span onClick={() => navigate(`/site-card-vite/${key.comp2._id}`)}>VS  {key.comp2.nomeCompetidor} </span> }
                                         {souCad ? " | " + key._id : ""}
@@ -79,7 +83,6 @@ const ListaVencedores = ({ souCad }) => {
                         <section style={{color: "#fff"}}>
                             Vencedor:
                             {vitoria.map((key) => {
-
                                 return (
                                     <ul className="table" style={{ width: "auto" }}>
                                         <ol style={{ color: "#fff" }}>
