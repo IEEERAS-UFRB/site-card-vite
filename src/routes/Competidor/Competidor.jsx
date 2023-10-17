@@ -6,6 +6,11 @@ import { baseURL } from "../../assets/axios/config";
 import "./style.css"
 import QRCode from "react-qr-code";
 
+import bgMega from "../../assets/images/bgMega.jpeg"
+import bgMini from "../../assets/images/bgMini.jpeg"
+import bgFollow from "../../assets/images/bgFollow.jpeg"
+import bgCode from "../../assets/images/bgCode.jpeg"
+
 const Competidor = () => {
 
     const { id } = useParams()
@@ -14,28 +19,39 @@ const Competidor = () => {
 
     const navigate = useNavigate()
 
+    const [bg, setBg] = useState("")
+
     useEffect(() => {
         axios.get(`${baseURL}/competidor/${id}`).then((res) => {
             setItem(res.data)
+            if (res.data.modalidade.match("Mega")) {
+                setBg(bgMega)
+            } else if (res.data.modalidade.match("Mini")) {
+                setBg(bgMini)
+            } else if (res.data.modalidade.match("Follow")) {
+                setBg(bgFollow)
+            } else if (res.data.modalidade.match("Robocode")) {
+                setBg(bgCode)
+            }
         })
     }, [])
 
-    const irPara = (item) =>{
+    const irPara = (item) => {
         navigate(`${item}`)
     }
 
     return (
-        <div className="container-card container-card-comp">
-            <section style={{ display: "flex", flexDirection: "column", alignItems: "center", width:"100%" }}>
+        <div className="container-card container-card-comp" style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover", backgroundPosition: "center", color: "#fff" }}>
+            <section style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%"}}>
                 <h3>{item.nomeCompetidor}</h3>
-                <section id="competidor" style={{ width: "50vh" }}>
+                <section id="competidor" style={{ width: "auto" }}>
                     <img src={item.linkGif} alt="" />
                     <section id="info-competidor">
                         <p><span>Instituição: </span>{item.instituicao}</p>
                         <hr />
                         <p><span>Ranking: </span>{item.ranking}</p>
                         <hr />
-                        <p><span>{item.modalidade == "Follow Line" ? "Melhor Tempo: " : "Pontuação"}</span>{item.modalidade == "Follow Line" ? Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100 + "s" : item.pontuacao}</p>
+                        <p><span>{item.modalidade == "Follow Line" ? "Melhor Tempo: " : "Pontuação: "}</span>{item.modalidade == "Follow Line" ? Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100 + "s" : item.pontuacao}</p>
                         <hr />
                         <p><span>Modalidade: </span>{item.modalidade}</p>
                     </section>
