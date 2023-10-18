@@ -24,7 +24,6 @@ const FollowLineTelao = ({ item }) => {
             <section id="info-follow-espec">
                 <section className="min-card" key={item.comp1._id} style={{ backgroundImage: `url(${bgFollow})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
                     <section className="header" style={{ color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width: "100%", textAlign: "center", padding: "10px" }}>
-                        <p>{item.comp1.ranking}</p>
                         <h5 style={{ fontSize: "8pt" }}>{item.comp1.nomeCompetidor}</h5>
                     </section>
 

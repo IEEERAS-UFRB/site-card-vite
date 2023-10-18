@@ -35,11 +35,11 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
         <>
             {(acabou) ? (
                 vencedor.map((item) => {
+                    console.log(item)
                     return (
                         <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
                             <section className="mini-card-telao"style={{backgroundImage: `url(${bgMini})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
                                 <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
-                                    <p>{item.comp.ranking}</p> 
                                     <h5>{vencedor[0] !== undefined ? item.comp.nomeCompetidor : ""}</h5>
                                 </section>
 
@@ -72,7 +72,6 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
                             <section id="container-sumo" key={item._id}>
                                 <section className="mini-card-telao" style={{backgroundImage: `url(${bgMini})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
                                 <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
-                                        <p>{item.ranking}</p>
                                         <h5>{item.nomeCompetidor}</h5>
                                     </section>
 

@@ -47,7 +47,6 @@ const RobocodeTelao = ({ competidores, vencedor }) => {
                             <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
                                 <section className="min-card" style={{backgroundImage: `url(${bgCode})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
                                 <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
-                                        {/* <p>{item.comp.ranking}</p> */}
                                         <h5>{vencedor[0] !== undefined ? item.comp.nomeCompetidor : ""}</h5>
                                     </section>
 
@@ -80,7 +79,6 @@ const RobocodeTelao = ({ competidores, vencedor }) => {
                                 <section id="container-sumo" key={item._id}>
                                     <section className="min-card" style={{backgroundImage: `url(${bgCode})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
                                 <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
-                                            <p>{item.ranking}</p>
                                             <h5>{item.nomeCompetidor}</h5>
                                         </section>
 
