@@ -4,6 +4,8 @@ import { baseURL } from "../../../assets/axios/config";
 
 // import "./style.css"
 
+import bgMini from "../../../assets/images/bgMini.jpeg"
+
 const MiniSumoTelao = ({ competidores, vencedor }) => {
 
     const [acabou, setAcabou] = useState(false)
@@ -33,11 +35,11 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
         <>
             {(acabou) ? (
                 vencedor.map((item) => {
+                    console.log(item)
                     return (
                         <section id="container-sumo" key={vencedor[0] !== undefined ? item.comp._id : ""}>
-                            <section className="mini-card-telao" >
-                                <section className="header">
-                                    <p>{item.comp.ranking}</p> 
+                            <section className="mini-card-telao"style={{backgroundImage: `url(${bgMini})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                     <h5>{vencedor[0] !== undefined ? item.comp.nomeCompetidor : ""}</h5>
                                 </section>
 
@@ -68,9 +70,8 @@ const MiniSumoTelao = ({ competidores, vencedor }) => {
                     return (
                         <>
                             <section id="container-sumo" key={item._id}>
-                                <section className="mini-card-telao" >
-                                    <section className="header">
-                                        <p>{item.ranking}</p>
+                                <section className="mini-card-telao" style={{backgroundImage: `url(${bgMini})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                         <h5>{item.nomeCompetidor}</h5>
                                     </section>
 

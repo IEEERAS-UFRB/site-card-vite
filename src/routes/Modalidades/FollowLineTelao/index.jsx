@@ -2,6 +2,8 @@ import React from "react";
 
 import "./style.css"
 
+import bgFollow from "../../../assets/images/bgFollow.jpeg"
+
 const FollowLineTelao = ({ item }) => {
 
     return (
@@ -10,20 +12,19 @@ const FollowLineTelao = ({ item }) => {
             <section className="espectador" style={{ justifyContent: "space-around" }}>
                 <img src="https://th.bing.com/th/id/OIP.OTSTDNhQ2wEJ2LOpftI84AHaEG?pid=ImgDet&rs=1" alt="" />
                 <div style={{ color: "#fff" }}>
-                    { 
-                        item.tempo.tempo2 === "--" 
-                            ? (item.tempo.tempo1 < 100 ?  "0:" + item.tempo.tempo1 : Math.floor(item.tempo.tempo1 / 100) + ":" + item.tempo.tempo1 % 100)
-                            : (item.tempo.tempo3 === '--') 
-                                ? (item.tempo.tempo2 < 100 ?  "0:" + item.tempo.tempo2 : Math.floor(item.tempo.tempo2 / 100) + ":" + item.tempo.tempo2 % 100)
-                                : (item.tempo.tempo3 < 100 ?  "0:" + item.tempo.tempo3 : Math.floor(item.tempo.tempo3 / 100) + ":" + item.tempo.tempo3 % 100)
+                    {
+                        item.tempo.tempo2 === "--"
+                            ? (item.tempo.tempo1 < 100 ? "0:" + item.tempo.tempo1 : Math.floor(item.tempo.tempo1 / 100) + ":" + item.tempo.tempo1 % 100)
+                            : (item.tempo.tempo3 === '--')
+                                ? (item.tempo.tempo2 < 100 ? "0:" + item.tempo.tempo2 : Math.floor(item.tempo.tempo2 / 100) + ":" + item.tempo.tempo2 % 100)
+                                : (item.tempo.tempo3 < 100 ? "0:" + item.tempo.tempo3 : Math.floor(item.tempo.tempo3 / 100) + ":" + item.tempo.tempo3 % 100)
                     } s </div>
             </section>
 
             <section id="info-follow-espec">
-                <section className="min-card" key={item.comp1._id}>
-                    <section className="header">
-                        <p>{item.comp1.ranking}</p>
-                        <h5 style={{fontSize:"8pt"}}>{item.comp1.nomeCompetidor}</h5>
+                <section className="min-card" key={item.comp1._id} style={{ backgroundImage: `url(${bgFollow})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
+                    <section className="header" style={{ color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width: "100%", textAlign: "center", padding: "10px" }}>
+                        <h5 style={{ fontSize: "8pt" }}>{item.comp1.nomeCompetidor}</h5>
                     </section>
 
                     <section className="competidor">

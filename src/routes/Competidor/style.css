@@ -36,9 +36,15 @@
     padding: 10px;
 }
 
-#competidor img {
-    width: 150px;
-    height: 150px;
+#imgComp{
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.equipe img {
+    width: 200px;
+    height: 200px;
     object-fit: contain;
 }
 
@@ -52,4 +58,12 @@
 
 #info-competidor span {
     font-weight: bold;
+}
+
+@media (max-width: 450px) {
+    #competidor img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
 }

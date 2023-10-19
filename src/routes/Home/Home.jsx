@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../assets/axios/config";
 
+import bgMega from "../../assets/images/bgMega.jpeg"
+import bgMini from "../../assets/images/bgMini.jpeg"
+import bgFollow from "../../assets/images/bgFollow.jpeg"
+import bgCode from "../../assets/images/bgCode.jpeg"
+
 const Home = () => {
 
     const [competidores, setCompetidores] = useState([])
@@ -89,8 +94,8 @@ const Home = () => {
                     contMega++
                     return (
                         <>
-                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
-                                <section className="header">
+                            <section key={item._id} id="card" style={{backgroundImage: `url(${bgMega})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                     <p>{contMega}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
@@ -121,8 +126,8 @@ const Home = () => {
                     contMini++
                     return (
                         <>
-                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
-                                <section className="header">
+                            <section key={item._id} id="card" style={{backgroundImage: `url(${bgMini})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                     <p>{contMini}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
@@ -154,8 +159,8 @@ const Home = () => {
                     contFollow++
                     return (
                         <>
-                            <section key={item._id} id="card" className="cardFollow" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
-                                <section className="header">
+                            <section key={item._id} id="card" style={{backgroundImage: `url(${bgFollow})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}  className="cardFollow" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                     <p>{contFollow}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
@@ -186,8 +191,8 @@ const Home = () => {
                     contCode++
                     return (
                         <>
-                            <section key={item._id} id="card" onClick={() => navigate(`/site-card-vite/${item._id}`)}>
-                                <section className="header">
+                            <section key={item._id} id="card" style={{backgroundImage: `url(${bgCode})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}  onClick={() => navigate(`/site-card-vite/${item._id}`)}>
+                                <section className="header" style={{color: "#fff", fontWeight: "bold", background: "rgba(0,0,0,0.5)", width:"100%", textAlign: "center", padding: "10px"}}>
                                     <p>{contCode}</p>
                                     <h5>{item.nomeCompetidor}</h5>
                                 </section>
