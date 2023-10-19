@@ -79,34 +79,6 @@ const Ranking = () => {
     return (
         <section id="table-ranking">
             <section>
-                <h2>Follow:</h2>
-                <hr />
-                {follow.map((item) => {
-                    contFollow++
-                    return (
-                        <>
-                            <section key={item._id} className="itens-ranking">
-                                <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
-                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
-                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
-                                {item.modalidade.match("Follow")
-                                    ? (<p style={{ width: "20%", textAlign: "center" }}>
-                                        {
-                                            item.pontuacao
-                                                ? (item.pontuacao < 100 ? "0:" + item.pontuacao : Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100)
-                                                : "0:00"
-                                        }
-                                    </p>)
-                                    : (<p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>)}
-                            </section>
-                            <hr style={{ width: "95%", margin: "5px auto" }} />
-
-                        </>
-                    )
-                })}
-            </section>
-            <br />
-            <section>
                 <h2>Mega:</h2>
                 <hr />
                 {mega.map((item) => {
@@ -141,6 +113,34 @@ const Ranking = () => {
                             <hr style={{ width: "95%", margin: "5px auto" }} />
                         </>
 
+                    )
+                })}
+            </section>
+            <br />
+            <section>
+                <h2>Follow:</h2>
+                <hr />
+                {follow.map((item) => {
+                    contFollow++
+                    return (
+                        <>
+                            <section key={item._id} className="itens-ranking">
+                                <p style={{ width: "10%", textAlign: "center" }}>{contFollow}</p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.nomeRobo} </p>
+                                <p style={{ width: "35%", fontSize: "15pt" }}>{item.equipe} </p>
+                                {item.modalidade.match("Follow")
+                                    ? (<p style={{ width: "20%", textAlign: "center" }}>
+                                        {
+                                            item.pontuacao
+                                                ? (item.pontuacao < 100 ? "0:" + item.pontuacao : Math.floor(item.pontuacao / 100) + ":" + item.pontuacao % 100)
+                                                : "0:00"
+                                        }
+                                    </p>)
+                                    : (<p style={{ width: "20%", textAlign: "center" }}>{item.pontuacao ? item.pontuacao : 0}</p>)}
+                            </section>
+                            <hr style={{ width: "95%", margin: "5px auto" }} />
+
+                        </>
                     )
                 })}
             </section>
