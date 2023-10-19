@@ -27,6 +27,10 @@
     margin: auto;
 }
 
+.equipe section{
+    margin: auto 10px;
+}
+
 #competidor {
     display: flex;
     flex-direction: column;
