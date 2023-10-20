@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseURL = "https://d8ea61d32ee96ccafa4d8f9d847b5ffa.serveo.net"
+export const baseURL = "https://0e3c3bdfa151bf8240f556ab31d1c9ea.serveo.net"
 
 const blogFetch = axios.create({
     baseURL: baseURL,
